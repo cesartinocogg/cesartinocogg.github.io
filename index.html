@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>César Tinoco · Narrative Design Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Bebas+Neue&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --ink:       #0d0d0f;
+    --paper:     #f5f2ec;
+    --muted:     #888070;
+    --rule:      #d8d0c0;
+    --rudon:     #8b4a1c;
+    --rudon-lt:  #f0d5b8;
+    --azul:      #1a3a5c;
+    --azul-lt:   #c0d8f0;
+    --vonder:    #3a1020;
+    --vonder-lt: #e8c0c8;
+    --accent:    #c8a860;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 18px;
+    line-height: 1.65;
+  }
+
+  hr.rule { border: none; border-top: 1px solid var(--rule); margin: 0; }
+
+  /* NAVEGACIÓN */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--ink); color: var(--paper);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 3rem; height: 52px;
+    border-bottom: 2px solid var(--accent);
+  }
+  nav .brand { font-family: 'DM Mono', monospace; font-size: .8rem; letter-spacing:.12em; color: var(--accent); }
+  nav ul { list-style: none; display: flex; gap: 2.5rem; }
+  nav ul a {
+    font-family: 'DM Mono', monospace; font-size: .72rem;
+    letter-spacing: .1em; text-transform: uppercase;
+    color: var(--paper); text-decoration: none;
+    opacity: .75; transition: opacity .2s;
+  }
+  nav ul a:hover { opacity: 1; color: var(--accent); }
+
+  /* HÉROE */
+  .hero {
+    background: var(--ink); color: var(--paper);
+    padding: 7rem 5rem 5rem; position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: 'NARRATIVE DESIGN';
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(4rem, 13vw, 11rem);
+    letter-spacing: .04em;
+    color: rgba(255,255,255,.04);
+    white-space: nowrap; pointer-events: none; line-height: 1;
+  }
+  .hero-label {
+    font-family: 'DM Mono', monospace; font-size: .75rem;
+    letter-spacing: .18em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: .8rem;
+  }
+  .hero-label::before { content:''; display:block; width:3rem; height:1px; background:var(--accent); }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 7vw, 6.5rem);
+    font-weight: 300; line-height: 1.0;
+    margin-bottom: 1.5rem; letter-spacing: -.01em;
+  }
+  .hero h1 em { font-style: italic; color: var(--accent); }
+  .hero-sub {
+    font-size: 1.3rem; font-weight: 300;
+    color: rgba(245,242,236,.65);
+    max-width: 55ch; margin-bottom: 3rem; line-height: 1.7;
+  }
+  .hero-stats {
+    display: grid; grid-template-columns: repeat(4, auto);
+    gap: 0; width: fit-content;
+    border: 1px solid rgba(245,242,236,.2);
+  }
+  .hero-stat { padding: 1.1rem 2rem; border-right: 1px solid rgba(245,242,236,.2); }
+  .hero-stat:last-child { border-right: none; }
+  .hero-stat .n {
+    display: block; font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.4rem; line-height: 1; color: var(--accent); letter-spacing: .05em;
+  }
+  .hero-stat .l {
+    display: block; font-family: 'DM Mono', monospace;
+    font-size: .65rem; letter-spacing: .12em; text-transform: uppercase;
+    color: rgba(245,242,236,.5); margin-top: .2rem;
+  }
+
+  /* SECCIONES */
+  section { padding: 5rem 5rem; }
+  section + section { border-top: 1px solid var(--rule); }
+
+  .section-label {
+    font-family: 'DM Mono', monospace; font-size: .7rem;
+    letter-spacing: .18em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 2rem;
+    display: flex; align-items: center; gap: .8rem;
+  }
+  .section-label::after { content:''; flex:1; height:1px; background:var(--rule); }
+
+  /* SOBRE MÍ */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+  .about-grid h2 { font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 300; line-height: 1.2; }
+  .about-grid h2 em { font-style: italic; }
+  .about-body p { margin-bottom: 1.2rem; color: #2d2b28; font-size: 1.05rem; }
+  .about-body p:last-child { margin-bottom: 0; }
+
+  /* HABILIDADES */
+  .skills-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 2px; background: var(--rule);
+  }
+  .skill-cell { background: var(--paper); padding: 2rem 2.2rem; }
+  .skill-cell h3 {
+    font-family: 'DM Mono', monospace; font-size: .75rem;
+    letter-spacing: .12em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 1rem;
+    border-bottom: 1px solid var(--rule); padding-bottom: .6rem;
+  }
+  .skill-cell ul { list-style: none; }
+  .skill-cell ul li {
+    font-size: .98rem; color: #2d2b28;
+    padding: .3rem 0; border-bottom: 1px dashed var(--rule);
+    display: flex; align-items: center; gap: .6rem;
+  }
+  .skill-cell ul li:last-child { border-bottom: none; }
+  .skill-cell ul li::before { content: '→'; font-family: 'DM Mono', monospace; font-size: .75rem; color: var(--accent); flex-shrink: 0; }
+
+  /* PROYECTOS */
+  .project-block { padding: 0; border-top: 1px solid var(--rule); }
+  .project-header { display: grid; grid-template-columns: auto 1fr; gap: 0; }
+  .project-number {
+    writing-mode: vertical-rl; text-orientation: mixed; transform: rotate(180deg);
+    font-family: 'Bebas Neue', sans-serif; font-size: 7rem; line-height: .9;
+    padding: 2.5rem 2rem; letter-spacing: .05em;
+  }
+  .project-meta { padding: 3rem 3rem 3rem 0; border-left: 2px solid; }
+  .project-genre { font-family: 'DM Mono', monospace; font-size: .68rem; letter-spacing: .18em; text-transform: uppercase; margin-bottom: .8rem; }
+  .project-title { font-size: clamp(2rem, 4.5vw, 3.5rem); font-weight: 300; line-height: 1.1; margin-bottom: 1rem; letter-spacing: -.01em; }
+  .project-pitch { font-size: 1.12rem; font-style: italic; max-width: 70ch; margin-bottom: 1.5rem; color: #3a3730; line-height: 1.6; }
+  .project-tags { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 2rem; }
+  .tag { font-family: 'DM Mono', monospace; font-size: .65rem; letter-spacing: .1em; text-transform: uppercase; padding: .3rem .8rem; border: 1px solid; }
+
+  .project-body { padding: 3rem 5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+  .project-body.three-col { grid-template-columns: 1fr 1fr 1fr; }
+
+  .project-col h4 {
+    font-family: 'DM Mono', monospace; font-size: .7rem; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 1rem;
+    padding-bottom: .5rem; border-bottom: 1px solid var(--rule);
+  }
+  .project-col p { font-size: .98rem; color: #2d2b28; margin-bottom: .8rem; }
+  .project-col ul { list-style: none; }
+  .project-col ul li {
+    font-size: .95rem; color: #2d2b28;
+    padding: .35rem 0 .35rem 1.2rem;
+    border-bottom: 1px solid var(--rule); position: relative;
+  }
+  .project-col ul li::before { content: '▪'; position: absolute; left: 0; font-size: .5rem; top: .55rem; color: var(--accent); }
+  .project-col ul li:last-child { border-bottom: none; }
+
+  .quote-block {
+    background: var(--ink); color: var(--paper);
+    padding: 2.5rem 3rem; border-left: 4px solid var(--accent);
+    margin: 0 5rem 3rem;
+  }
+  .quote-block blockquote { font-size: 1.15rem; font-style: italic; line-height: 1.6; margin-bottom: .8rem; }
+  .quote-block cite { font-family: 'DM Mono', monospace; font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); }
+
+  /* COLORES POR PROYECTO */
+  .rudon .project-number  { color: var(--rudon-lt); background: var(--rudon); }
+  .rudon .project-meta    { border-color: var(--rudon); }
+  .rudon .project-genre   { color: var(--rudon); }
+  .rudon .tag             { border-color: var(--rudon); color: var(--rudon); }
+
+  .azul .project-number  { color: var(--azul-lt); background: var(--azul); }
+  .azul .project-meta    { border-color: var(--azul); }
+  .azul .project-genre   { color: var(--azul); }
+  .azul .tag             { border-color: var(--azul); color: var(--azul); }
+
+  .vonder .project-number { color: var(--vonder-lt); background: var(--vonder); }
+  .vonder .project-meta   { border-color: var(--vonder); }
+  .vonder .project-genre  { color: var(--vonder); }
+  .vonder .tag            { border-color: var(--vonder); color: var(--vonder); }
+
+  /* PILARES */
+  .pillars { display: grid; grid-template-columns: repeat(5, 1fr); gap: 2px; background: var(--rule); margin: 0 5rem 3rem; }
+  .pillar { background: var(--paper); padding: 1.8rem 1.5rem; }
+  .pillar .p-num { font-family: 'Bebas Neue', sans-serif; font-size: 3rem; line-height: 1; color: var(--rudon-lt); display: block; margin-bottom: .3rem; }
+  .pillar h5 { font-family: 'DM Mono', monospace; font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: var(--rudon); margin-bottom: .5rem; }
+  .pillar p { font-size: .87rem; color: #3a3730; }
+
+  /* TABLA DE ESPECIES */
+  .species-sample { margin: 0 5rem 3rem; border: 1px solid var(--rule); overflow: hidden; }
+  .species-sample table { width: 100%; border-collapse: collapse; font-size: .88rem; }
+  .species-sample thead { background: var(--azul); color: var(--paper); }
+  .species-sample thead th { font-family: 'DM Mono', monospace; font-size: .65rem; letter-spacing: .1em; text-transform: uppercase; padding: .8rem 1rem; text-align: left; font-weight: 400; }
+  .species-sample tbody tr { border-bottom: 1px solid var(--rule); }
+  .species-sample tbody tr:last-child { border-bottom: none; }
+  .species-sample tbody td { padding: .7rem 1rem; color: #2d2b28; vertical-align: top; }
+  .species-sample tbody td:first-child { font-style: italic; color: var(--azul); font-weight: 600; }
+
+  /* TABLA DE CLANES */
+  .clan-grid { margin: 0 5rem 3rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--rule); }
+  .clan-card { background: var(--paper); padding: 1.5rem; }
+  .clan-card .clan-name { font-size: 1.2rem; font-weight: 600; color: var(--vonder); margin-bottom: .2rem; }
+  .clan-card .clan-concept { font-family: 'DM Mono', monospace; font-size: .65rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: .6rem; }
+  .clan-card .clan-align { display: inline-block; font-family: 'DM Mono', monospace; font-size: .6rem; letter-spacing: .08em; text-transform: uppercase; padding: .15rem .5rem; border: 1px solid; margin-bottom: .6rem; }
+  .align-pro { border-color: #3a7a4a; color: #3a7a4a; }
+  .align-con { border-color: var(--vonder); color: var(--vonder); }
+  .align-neu { border-color: var(--muted); color: var(--muted); }
+  .clan-card p { font-size: .86rem; color: #3a3730; }
+
+  /* COMPETENCIAS */
+  .comp-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 3rem 5rem; }
+  .comp-item h4 { font-size: 1.4rem; font-weight: 300; margin-bottom: .5rem; }
+  .comp-item h4 em { font-style: italic; }
+  .comp-item p { font-size: .95rem; color: #3a3730; }
+  .comp-bar { height: 3px; background: var(--rule); margin: .5rem 0 .8rem; position: relative; }
+
+  /* EXPERIENCIA */
+  .exp-row { display: grid; grid-template-columns: 200px 1fr; gap: 2rem; padding: 1.5rem 0; border-bottom: 1px solid var(--rule); align-items: start; }
+  .exp-row:first-child { border-top: 1px solid var(--rule); }
+  .exp-date { font-family: 'DM Mono', monospace; font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); padding-top: .25rem; }
+  .exp-title { font-size: 1.1rem; font-weight: 600; margin-bottom: .2rem; }
+  .exp-org { font-size: .95rem; color: var(--muted); font-style: italic; margin-bottom: .4rem; }
+  .exp-desc { font-size: .92rem; color: #3a3730; }
+
+  /* PIE */
+  footer {
+    background: var(--ink); color: var(--paper);
+    padding: 4rem 5rem;
+    display: grid; grid-template-columns: 1fr auto;
+    align-items: end; gap: 3rem;
+    border-top: 3px solid var(--accent);
+  }
+  footer h2 { font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 300; line-height: 1.1; margin-bottom: 1rem; }
+  footer h2 em { font-style: italic; color: var(--accent); }
+  footer p { color: rgba(245,242,236,.6); font-size: 1rem; margin-bottom: .4rem; }
+  footer a { color: var(--accent); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+  .footer-right { text-align: right; }
+  .footer-right .label { font-family: 'DM Mono', monospace; font-size: .65rem; letter-spacing: .12em; text-transform: uppercase; color: rgba(245,242,236,.4); margin-bottom: .4rem; }
+  .footer-right .info { color: rgba(245,242,236,.8); font-size: .95rem; }
+
+  /* BANDA DE NOTAS */
+  .note-band {
+    background: #f0ebe0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+    padding: 1rem 5rem; font-family: 'DM Mono', monospace; font-size: .68rem;
+    letter-spacing: .08em; color: var(--muted);
+    display: flex; align-items: center; gap: 3rem;
+  }
+  .note-band span::before { content: '○  '; }
+
+  /* ─── HERO LAYOUT CON FOTO ──────────────────────── */
+  .hero-top {
+    display: flex; align-items: flex-start;
+    justify-content: space-between; gap: 3rem;
+    margin-bottom: 3rem;
+  }
+  .hero-text { flex: 1; min-width: 0; }
+  .hero-text .hero-sub { margin-bottom: 0; }
+  .hero-photo {
+    flex-shrink: 0; align-self: center;
+    margin-top: .5rem;
+  }
+  .hero-photo img {
+    width: 200px; height: 260px; object-fit: cover;
+    border: 2px solid var(--accent);
+    display: block; cursor: zoom-in;
+    transition: opacity .25s, transform .25s;
+    filter: grayscale(15%);
+  }
+  .hero-photo img:hover { opacity: .85; transform: scale(1.02); }
+
+  /* ─── HERO BOTTOM: STATS + PATREON ──────────────── */
+  .hero-bottom {
+    display: flex; align-items: stretch; gap: 2.5rem;
+  }
+  .patreon-box {
+    display: flex; align-items: center;
+    border: 1px solid rgba(245,242,236,.2);
+    padding: .6rem;
+    flex-shrink: 0;
+  }
+  .patreon-box a { display: block; line-height: 0; }
+  .patreon-box img {
+    height: 76px; width: auto; max-width: 220px;
+    object-fit: contain; display: block;
+    cursor: zoom-in;
+    transition: opacity .25s, transform .25s;
+  }
+  .patreon-box img:hover { opacity: .85; transform: scale(1.02); }
+  .patreon-label {
+    font-family: 'DM Mono', monospace;
+    font-size: .6rem; letter-spacing: .12em;
+    text-transform: uppercase; color: rgba(245,242,236,.4);
+    text-align: center; margin-top: .4rem;
+  }
+  .patreon-wrap { display: flex; flex-direction: column; }
+
+  /* ─── IMAGEN DE PROYECTO ─────────────────────────── */
+  .project-meta {
+    display: flex; align-items: flex-start;
+    gap: 2.5rem;
+  }
+  .project-meta-text { flex: 1; min-width: 0; }
+  .project-cover {
+    flex-shrink: 0; align-self: center;
+    margin-right: 1rem;
+  }
+  .project-cover img {
+    width: 160px; height: 210px; object-fit: cover;
+    border: 2px solid; display: block;
+    cursor: zoom-in;
+    transition: opacity .25s, transform .25s;
+  }
+  .project-cover img:hover { opacity: .85; transform: scale(1.02); }
+  .rudon .project-cover img  { border-color: var(--rudon); }
+  .azul  .project-cover img  { border-color: var(--azul);  }
+  .vonder .project-cover img { border-color: var(--vonder);}
+
+  /* ─── LIGHTBOX ───────────────────────────────────── */
+  .lb-overlay {
+    display: none; position: fixed; inset: 0; z-index: 9999;
+    background: rgba(0,0,0,.93);
+    align-items: center; justify-content: center;
+    cursor: zoom-out;
+    animation: lb-fade .18s ease;
+  }
+  @keyframes lb-fade { from { opacity:0; } to { opacity:1; } }
+  .lb-overlay.open { display: flex; }
+  .lb-overlay img {
+    max-width: 90vw; max-height: 88vh;
+    object-fit: contain;
+    border: 2px solid var(--accent);
+    box-shadow: 0 0 80px rgba(0,0,0,.9);
+    cursor: default;
+    animation: lb-zoom .2s ease;
+  }
+  @keyframes lb-zoom { from { transform:scale(.92); opacity:0; } to { transform:scale(1); opacity:1; } }
+  .lb-close {
+    position: absolute; top: 1.2rem; right: 1.8rem;
+    color: var(--paper); font-size: 2.8rem;
+    cursor: pointer; font-family: 'DM Mono', monospace;
+    line-height: 1; opacity: .6; transition: opacity .15s;
+    user-select: none;
+  }
+  .lb-close:hover { opacity: 1; }
+  .lb-hint {
+    position: absolute; bottom: 1.2rem; left: 50%;
+    transform: translateX(-50%);
+    font-family: 'DM Mono', monospace; font-size: .65rem;
+    letter-spacing: .12em; text-transform: uppercase;
+    color: rgba(245,242,236,.35);
+  }
+
+  @media (max-width: 900px) {
+    nav, section, footer { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .hero { padding: 4rem 1.5rem 3rem; }
+    .hero-stats { grid-template-columns: repeat(2, auto); }
+    .about-grid, .skills-grid, .project-body, .comp-grid, .pillars, .clan-grid { grid-template-columns: 1fr; }
+    .project-header { grid-template-columns: 1fr; }
+    .project-number { writing-mode: horizontal-tb; transform: none; padding: 1.5rem; font-size: 4rem; }
+    .pillars, .species-sample, .clan-grid, .quote-block { margin-left: 0; margin-right: 0; }
+    .project-body { padding: 2rem 1.5rem; }
+    footer { grid-template-columns: 1fr; }
+    .footer-right { text-align: left; }
+    nav ul { gap: 1rem; }
+    .exp-row { grid-template-columns: 1fr; }
+    .hero-top { flex-direction: column-reverse; align-items: center; }
+    .hero-photo img { width: 140px; height: 180px; }
+    .hero-bottom { flex-direction: column; }
+    .patreon-box { justify-content: center; }
+    .project-meta { flex-direction: column-reverse; align-items: flex-start; }
+    .project-cover { align-self: flex-start; }
+    .project-cover img { width: 120px; height: 160px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVEGACIÓN -->
+<nav>
+  <div class="brand">CÉSAR TINOCO &nbsp;·&nbsp; NARRATIVE DESIGN</div>
+  <ul>
+    <li><a href="#about">Profile</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#contacto">ES</a></li>
+  </ul>
+</nav>
+
+<!-- HÉROE -->
+<div class="hero">
+  <div class="hero-top">
+    <div class="hero-text">
+      <div class="hero-label">Mitopeota, Narrative Designer &amp; Worldbuilder</div>
+      <h1>César<br/><em>Tinoco</em></h1>
+      <p class="hero-sub">
+        I build the systems, factions, biologies, and moral architectures that make fictional worlds feel real — then write the documents that let other creators live and create inside them.
+      </p>
+    </div>
+    <div class="hero-photo">
+      <img
+        src="TU_URL_IMAGEN_PERFIL"
+        alt="César Tinoco"
+        onclick="openLightbox(this.src)"
+        title="Click to enlarge"
+      />
+    </div>
+  </div>
+
+  <div class="hero-bottom">
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="n">3</span>
+        <span class="l">Narrative Bibles</span>
+      </div>
+      <div class="hero-stat">
+        <span class="n">30+</span>
+        <span class="l">Species Designed</span>
+      </div>
+      <div class="hero-stat">
+        <span class="n">8+</span>
+        <span class="l">Years in Gaming</span>
+      </div>
+      <div class="hero-stat">
+        <span class="n">5</span>
+        <span class="l">Marketing</span>
+      </div>
+    </div>
+    <div class="patreon-wrap">
+      <div class="patreon-box">
+        <a href="https://www.patreon.com/c/CesarTinocoGG" target="_blank" title="Support me on Patreon">
+          <img
+            src="TU_URL_IMAGEN_PATREON"
+            alt="Support me on Patreon"
+            onclick="event.preventDefault(); openLightbox(this.src);"
+            title="Click to enlarge · Double-click to visit Patreon"
+            ondblclick="window.open('https://www.patreon.com/c/CesarTinocoGG','_blank')"
+          />
+        </a>
+      </div>
+      <div class="patreon-label">Support me on Patreon</div>
+    </div>
+  </div>
+</div>
+
+<!-- SOBRE MÍ -->
+<section id="about">
+  <div class="section-label">01 &nbsp; Professional Profile</div>
+  <div class="about-grid">
+    <div>
+      <h2>Worlds built<br/>on <em>internal logic,</em><br/>with their own systems.</h2>
+    </div>
+    <div class="about-body">
+      <p>I'm a narrative designer, author, and digital strategist based in Valencia, Venezuela, with over eight years of experience at the intersection of storytelling, game production, and marketing. I have worked as COO at EVE Games Studios, Game Designer at Hello Monster, and Director of Operations at Fusion Esports — roles that gave me a deep understanding of how narratives function as live products within development pipelines.</p>
+      <p>My creative practice centers on narrative systems design: building the underlying logic — magical biology, technological hierarchies, faction philosophies, species ecologies — that gives a world coherence and makes its stories feel earned rather than arbitrary. I document this work in comprehensive narrative bibles designed for cross-disciplinary teams of writers, designers, artists, and game masters.</p>
+      <p>I also hold a degree in Cinematographic Screenwriting from the Centro Nacional Autónomo de Cinematografía (CNAC), am a published author, and have taught at the Universidad Bolivariana de Venezuela — a combination that shapes how I write for audiences across every generation.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HABILIDADES -->
+<section id="skills">
+  <div class="section-label">02 &nbsp; Narrative Design Competencies</div>
+  <div class="skills-grid">
+    <div class="skill-cell">
+      <h3>World Systems &amp; Architecture</h3>
+      <ul>
+        <li>Biological and technological magic and power systems</li>
+        <li>Internal-consistency rule frameworks (Immutable Laws)</li>
+        <li>Faction design with nuanced moral positioning</li>
+        <li>Species ecology, morphology, and cultural logic</li>
+        <li>Cosmology, metaphysics, and origin mythology</li>
+        <li>Economy, resource scarcity, and political conflict drivers</li>
+      </ul>
+    </div>
+    <div class="skill-cell">
+      <h3>Documentation &amp; Collaboration</h3>
+      <ul>
+        <li>Full narrative bibles (guides for writers, designers, and artists)</li>
+        <li>Character archetypes and protagonist profiles</li>
+        <li>Plot seed libraries (20+ per project)</li>
+        <li>Glossaries of world-specific terms with direct translations</li>
+        <li>Sensory design (sound, smell, texture of each location)</li>
+        <li>Adaptation guides for multiple formats and creators</li>
+      </ul>
+    </div>
+    <div class="skill-cell">
+      <h3>Genre Mastery &amp; Tone</h3>
+      <ul>
+        <li>Epic Fantasy — Realistic-consequential tone, not Grimdark</li>
+        <li>Hard Science Fiction — Quantum physics, space opera</li>
+        <li>Gothic Horror — Supernatural taxonomy and ethics</li>
+        <li>Thematic architecture: 4 interlocking macro-themes per world</li>
+        <li>Multi-species religious and philosophical systems</li>
+        <li>Military doctrine, tactics, and operational procedures</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CABECERA DE PROYECTOS -->
+<section id="projects" style="padding-bottom:0;">
+  <div class="section-label">03 &nbsp; Selected Projects</div>
+  <p style="max-width:60ch; font-size:1.05rem; color:#3a3730;">
+  </p>
+</section>
+
+<!-- PROYECTO 1: RUDON -->
+<section class="project-block rudon" style="padding:0; border-top:3px solid var(--rudon);">
+  <div class="project-header">
+    <div class="project-number">01</div>
+    <div class="project-meta">
+      <div class="project-meta-text">
+      <div class="project-genre">Epic Fantasy · Narrative Bible · Year 1240 C.E.</div>
+      <h2 class="project-title">The Scriptures<br/>of Rudon</h2>
+      <p class="project-pitch">"A world where power always has a biological price, where gods are imprisoned but their wounds are still bleeding, and where the only difference between a hero and a disaster is how well the former understands their own power before using it."</p>
+      <div class="project-tags">
+        <span class="tag">Biological Magic System</span>
+        <span class="tag">Draconic Vocal Magic</span>
+        <span class="tag">Faction Design</span>
+        <span class="tag">5 Continentes</span>
+        <span class="tag">20+ Plot Seeds</span>
+        <span class="tag">Dietary Alchemy</span>
+      </div>
+      </div>
+      <div class="project-cover">
+        <img
+          src="TU_URL_IMAGEN_RUDON"
+          alt="The Scriptures of Rudon"
+          onclick="openLightbox(this.src)"
+          title="Click to enlarge"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="note-band">
+    <span>Tone references: Sanderson (system) · G.R.R. Martin (moral ambiguity) · Abercrombie (consequence) · Rothfuss (magic as music)</span>
+    <span>Language: English/Spanish</span>
+    <span>Status: 90%</span>
+  </div>
+
+  <div style="padding: 3rem 5rem 0;">
+    <p style="font-size:.8rem; font-family:'DM Mono',monospace; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-bottom:1rem;">The Five Pillars — Core World Philosophy</p>
+  </div>
+
+  <div class="pillars">
+    <div class="pillar">
+      <span class="p-num">I</span>
+      <h5>Biological Price</h5>
+      <p>All magic requires specific nutrients that the Magic Circuits convert into etheric substrate. Without nutrients → the Circuits cannibalize the mage's own tissues.</p>
+    </div>
+    <div class="pillar">
+      <span class="p-num">II</span>
+      <h5>Knowledge First</h5>
+      <p>First Immutable Law: A mage who does not understand their spell does not control it — they unleash it. Knowledge matters more than power.</p>
+    </div>
+    <div class="pillar">
+      <span class="p-num">III</span>
+      <h5>Limits Define Character</h5>
+      <p>What a being cannot do is narratively richer than what it can. Dragohism — the most powerful magic — has one absolute vulnerability: silence.</p>
+    </div>
+    <div class="pillar">
+      <span class="p-num">IV</span>
+      <h5>Collective vs. Individual</h5>
+      <p>Dragons build power for the nest; humans build it for themselves. Neither philosophy is superior — but they are incompatible enough to require active work and explicit agreements to collaborate.</p>
+    </div>
+    <div class="pillar">
+      <span class="p-num">V</span>
+      <h5>No Invulnerability</h5>
+      <p>The Fourth Immutable Law: there is always a weakness, a limit, a point of failure. The gods Dago and Nasgu had absolute power — and their greatest vulnerability was exactly that power.</p>
+    </div>
+  </div>
+
+  <div class="project-body three-col">
+    <div class="project-col">
+      <h4>Magic Systems Designed</h4>
+      <ul>
+        <li><strong>Kinergia</strong> — Internal vital energy; redesigns the body from within. Inconvertible to external energy.</li>
+        <li><strong>Ethernergia</strong> — External cosmic energy; alters reality outward. Five-Circle mastery framework.</li>
+        <li><strong>Dragohism</strong> — Vocal magic integrated into the draconic vocal apparatus. Five tonal registers with radically different effects.</li>
+        <li><strong>Hirgh (Vile Magic)</strong> — Uses corrupt energy of the Vacuous; produces progressive cognitive degradation.</li>
+      </ul>
+    </div>
+    <div class="project-col">
+      <h4>Factions &amp; Political Design</h4>
+      <ul>
+        <li><strong>Metallic Dragons</strong> — Twelve centuries of historical loyalty fracturing under internal disagreement over human integration.</li>
+        <li><strong>Matte Dragons</strong> — Right in the diagnosis, wrong in the response. Generational tension between elders and youth.</li>
+        <li><strong>The Arron Empire</strong> — Efficiency as religion. Excellent at known questions; blind to unknown threats.</li>
+        <li><strong>Kingdom of Alexandria</strong> — A 400-generation secret so old the guardians themselves no longer know what they know and what they don't.</li>
+        <li><strong>Monks of Kinergia</strong> — The only faction without expansive ambition, in constant struggle to protect the world.</li>
+        <li><strong>The Tatorath</strong> — Invisible corrupted infiltrators. Indistinguishable except they never eat.</li>
+      </ul>
+    </div>
+    <div class="project-col">
+      <h4>Narrative Themes &amp; Macro-Design</h4>
+      <ul>
+        <li><strong>Knowledge as Responsibility</strong> — Whoever knows more has greater obligation over what they do with that knowledge.</li>
+        <li><strong>The Price of Being What You Are</strong> — Power leaves permanent physical marks. No one becomes something without it leaving traces.</li>
+        <li><strong>The Impossible Collaboration</strong> — The Seal Song was the only time all factions fully cooperated. Can it happen again?</li>
+        <li><strong>Power Without Purpose</strong> — The nestless queen holds the most advanced power in the world and no reason to use it.</li>
+        <li><strong>20 Plot Seeds</strong> — All documented with systemic consequence chains</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="quote-block" style="background:var(--rudon); border-color:var(--accent);">
+    <blockquote>"Year 1240 C.E. is the year before everything changes. The stories that occur in it are the stories of people who do not yet know they are in that year. That specific ignorance — of being on the threshold without knowing it is a threshold — is the gift that Rudon's present gives the creator."</blockquote>
+    <cite>— The Scriptures of Rudon, Adaptation Guide for Creators</cite>
+  </div>
+</section>
+
+<!-- PROYECTO 2: PLANETA AZUL -->
+<section class="project-block azul" style="padding:0; border-top:3px solid var(--azul);">
+  <div class="project-header">
+    <div class="project-number">02</div>
+    <div class="project-meta">
+      <div class="project-meta-text">
+      <div class="project-genre">Hard Sci-Fi · Space Opera · Narrative Bible</div>
+      <h2 class="project-title">Universo<br/>Planeta Azul</h2>
+      <p class="project-pitch">A galactic civilization where democracy erodes into corporate feudalism wherever quantum communications don't reach — and secrets are the most valuable currency in the universe.</p>
+      <div class="project-tags">
+        <span class="tag">30+ Especies</span>
+        <span class="tag">5 Major Factions</span>
+        <span class="tag">6 Religion Systems</span>
+        <span class="tag">Real Physics Applied</span>
+        <span class="tag">Political Economy</span>
+        <span class="tag">21 Sections</span>
+      </div>
+      </div>
+      <div class="project-cover">
+        <img
+          src="TU_URL_IMAGEN_PLANETA_AZUL"
+          alt="Blue Planet Universe"
+          onclick="openLightbox(this.src)"
+          title="Click to enlarge"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="note-band">
+    <span>Tone: Hard Sci-Fi + Space Opera Drama · NASAPUNK Aesthetic (Federation) · Fetish Aesthetic (Wilstoide) · Neo-Bushido (Saito)</span>
+    <span>Language: English/Spanish</span>
+    <span>Scale: Galactic — 40+ cluster systems with their respective planets</span>
+  </div>
+
+  <div class="project-body">
+    <div class="project-col">
+      <h4>Technology Systems Designed</h4>
+      <ul>
+        <li><strong>Warp Engine (Alcubierre-Casimir)</strong> — Based on real 1994 physics. One activation equals Earth's annual electricity output. Restricted to military and elite use.</li>
+        <li><strong>Quantum Entanglement Network</strong> — A pre-existing dimension within the galactic equivalent of the Internet. Accessing it with a full-control interface leaves the physical body completely defenseless.</li>
+        <li><strong>Mara Modular Ships</strong> — Circular modular architecture inspired by a real Venezuelan architect from 1972. The design philosophy shapes the entire aesthetic identity of the Federation.</li>
+        <li><strong>UMPA Exoskeletons</strong> — Repurposed industrial units. The underworld's warship. Four tactical variants, each with its own doctrine.</li>
+        <li><strong>Stellar Battery</strong> — Only one exists. Irreplicable. The Federation's most classified secret, powering humanity's mothership.</li>
+      </ul>
+    </div>
+    <div class="project-col">
+      <h4>World-System Design Decisions</h4>
+      <ul>
+        <li><strong>AI Prohibition</strong> — The AI War drew the legal boundary between Artificial Intelligence (banned) and Virtual Intelligence (controlled). The self-replicating machine factory was never found.</li>
+        <li><strong>Espers</strong> — Inter-species hybrid individuals with anomalous cognitive abilities. Detained on a secret planet whose existence the Federation officially denies.</li>
+        <li><strong>Wormholes as Narrative Engine</strong> — Natural, uncontrollable, unpredictable. When one closes, it can isolate an entire cluster forever. The tragedy of the Human and Maint Clusters results from this.</li>
+        <li><strong>Feudal Periphery</strong> — Clusters without quantum nodes operate in a different political reality: no central authority, no standard currency, no military protection.</li>
+        <li><strong>Q / "The Architect of Chaos"</strong> — A single unidentified individual who temporarily collapsed the Federation using only information, money, and time. Identity unknown. Motivations unknown. Still at large.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div style="padding: 0 5rem 1rem;">
+    <p style="font-size:.8rem; font-family:'DM Mono',monospace; letter-spacing:.1em; text-transform:uppercase; color:var(--azul); margin-bottom:1rem;">Species Catalog Sample (30+ species designed)</p>
+  </div>
+
+  <div class="species-sample">
+    <table>
+      <thead>
+        <tr>
+          <th>Species</th>
+          <th>Morphology</th>
+          <th>Cultural Note</th>
+          <th>Narrative Function</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Eoalo</td>
+          <td>Luminous spheroids, 0.5–3m, light appendages</td>
+          <td>Trifrequential communication; only Espers perceive the third frequency</td>
+          <td>The most advanced species. Never defeated. Never understood. Their warnings are always cryptic and always precise.</td>
+        </tr>
+        <tr>
+          <td>Uteo</td>
+          <td>Silicon-based, crystalline mineral</td>
+          <td>Their entire civilization is frozen in collective sacrifice to contain the Entity</td>
+          <td>One representative awake. Millions asleep underfoot. "La Joya" has been emitting a continuous scream for 3,000 years.</td>
+        </tr>
+        <tr>
+          <td>Esmiyuga</td>
+          <td>Vermiform, obligate symbiosis</td>
+          <td>Integrates into the host's nervous system; separation kills the host</td>
+          <td>The Path of the Bond: a religion built around choosing a symbiotic tie you can never undo.</td>
+        </tr>
+        <tr>
+          <td>Maint</td>
+          <td>Humanoid, horns, hip-mounted wings, prehensile tail</td>
+          <td>Real atmospheric flight. Isolated from the universe when their wormhole closed.</td>
+          <td>A civilization isolated indefinitely. The tragedy of Yejekia Ben Ari: her daughter is an Esper. What does she sacrifice to save her?</td>
+        </tr>
+        <tr>
+          <td>Wilstoide</td>
+          <td>Reptiloid bipeds, bone crests that grow for life</td>
+          <td>Elders have massive bone "helmets"; they are living libraries venerated above all</td>
+          <td>The supreme antagonist empire. Their greatest fear: the Condemned to the Broken Quill — total erasure from all records.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="project-body">
+    <div class="project-col">
+      <h4>Six Religion Systems Designed</h4>
+      <ul>
+        <li><strong>Eudaimonism</strong> — Synthesizes six philosophical currents (Humanism, Altruism, Stoicism, Determinism, Hedonism, Idealism) into a lived practice. Libraries and observatories are its temples.</li>
+        <li><strong>Tenguer</strong> — Martial-religious order: combat as the path to spiritual clarity. The Butterfly Swords are their greatest secret — a dual weapon capable of cutting through any material, including Warp ring generators.</li>
+        <li><strong>Path of the Bond</strong> — The ethics of a bond you cannot revoke. The Federation requires 90 days of waiting. The Bonded reply: "Death is also irreversible and nobody asks consent for birth."</li>
+        <li><strong>Eyes of the Deep</strong> — The Lateo species' skin secretes a substance that produces mystical states in other species. They never asked for this. The ethical debate of what your biology does to other minds.</li>
+        <li><strong>Grand Hermeneutics</strong> — The universe as an infinite text. The Threshold Cults read meanings that destroy sanity in ordinary minds.</li>
+        <li><strong>The Scaly Design</strong> — The Wilstoide theocracy: racial supremacy as divine mandate. Legally classified as hate ideology in federal space.</li>
+      </ul>
+    </div>
+    <div class="project-col">
+      <h4>Narrative Arcs &amp; Open Tensions</h4>
+      <ul>
+        <li><strong>The Maint Tragedy</strong> — The Ben Ari family seat, the universe's greatest transporter, is in a cluster isolated forever. The heir's daughter is imprisoned in the Federation's secret genetics facility. What does she sacrifice to save her?</li>
+        <li><strong>The Saito Succession</strong> — Five heirs, five possible futures for the human empire: federation, vassalage, religious theocracy, reform, or chaos. The Wilstoide have already bet.</li>
+        <li><strong>Espers and Academia</strong> — The Federation's greatest secret is also its greatest ethical shame. The day it becomes public, no institutional legitimacy survives.</li>
+        <li><strong>The Eoalo Mystery</strong> — Why do they observe and never intervene? What does the Gamma frequency contain? Are the wormholes their creation — or their responsibility?</li>
+        <li><strong>Q's Return</strong> — "Q didn't leave. Q is waiting. The pizza is reheating." An open arc designed to destabilize the universe-level status quo at any narrative moment the team decides.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="quote-block" style="background:var(--azul); border-color:var(--accent);">
+    <blockquote>"Millions. The entire planet is an organism. And it has been asleep for three thousand years beneath the feet of a civilization that never knew it was walking over people."</blockquote>
+    <cite>— Blue Planet Universe, description of the Uteo people and La Joya</cite>
+  </div>
+</section>
+
+<!-- PROYECTO 3: VONDERBURG -->
+<section class="project-block vonder" style="padding:0; border-top:3px solid var(--vonder);">
+  <div class="project-header">
+    <div class="project-number">03</div>
+    <div class="project-meta">
+      <div class="project-meta-text">
+      <div class="project-genre">Gothic Horror · Urban Fantasy · Operational Doctrine</div>
+      <h2 class="project-title">Manual para<br/>Cazar Vampiros<br/>de los Vonderburg</h2>
+      <p class="project-pitch">Within the Velum Salomonis Narrative Universe, this is an operational field manual for a vampire-hunting clan — written entirely as a classified in-universe primary source, fusing vampire taxonomy, military doctrine, legal ethics, and organizational psychology into a single cohesive system.</p>
+      <div class="project-tags">
+        <span class="tag">15 Vampire Clans</span>
+        <span class="tag">5-Tier Hierarchy</span>
+        <span class="tag">Documento In-Universe</span>
+        <span class="tag">Tactical Doctrine</span>
+        <span class="tag">Ethics Framework</span>
+        <span class="tag">Case Studies</span>
+      </div>
+      </div>
+      <div class="project-cover">
+        <img
+          src="TU_URL_IMAGEN_VONDERBURG"
+          alt="Vonderburg Vampire Hunting Manual"
+          onclick="openLightbox(this.src)"
+          title="Click to enlarge"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="note-band">
+    <span>Document type: Classified in-universe manual (primary source narration)</span>
+    <span>Language: English/Spanish</span>
+    <span>Author (in-universe): Petar Vonderburg, Elite Hunter</span>
+  </div>
+
+  <div style="padding: 2rem 5rem .5rem;">
+    <p style="font-size:.8rem; font-family:'DM Mono',monospace; letter-spacing:.1em; text-transform:uppercase; color:var(--muted);">15 Vampire Clans with their own Concept, Alignment, and Ritual — Sample</p>
+  </div>
+
+  <div class="clan-grid">
+    <div class="clan-card">
+      <div class="clan-name">Draskull</div>
+      <div class="clan-concept">Concept: Dominion · Lords: 5</div>
+      <span class="clan-align align-pro">Pro-Pact</span>
+      <p>The most numerous and organized. Members use their Concept to dominate territories, creating personality cults. Governance rotates between three lords every 10 years.</p>
+    </div>
+    <div class="clan-card">
+      <div class="clan-name">Vurdalok</div>
+      <div class="clan-concept">Concept: Hidden · Lords: 3</div>
+      <span class="clan-align align-con">Anti-Pact</span>
+      <p>Led by Dimitri Vurdalok — a former member of the hunters' own bloodline. Primary target of the entire Vonderburg clan. Open Hunt authorized at all times.</p>
+    </div>
+    <div class="clan-card">
+      <div class="clan-name">Borgias</div>
+      <div class="clan-concept">Concept: Subterfuge · Lords: 2</div>
+      <span class="clan-align align-neu">Neutral</span>
+      <p>The second most numerous. They live infiltrated in the highest spheres of society. Their elders control mafias, banks, and corporations. Natural enemies of the Carniolas.</p>
+    </div>
+    <div class="clan-card">
+      <div class="clan-name">Tzimacan</div>
+      <div class="clan-concept">Concept: Form · Lords: 3</div>
+      <span class="clan-align align-pro">Pro-Pact</span>
+      <p>Reclusive, living in deep forests. Their Ritual transforms a newly converted vampire into an animal companion — with whom many develop romantic bonds.</p>
+    </div>
+    <div class="clan-card">
+      <div class="clan-name">Rangda</div>
+      <div class="clan-concept">Concept: Magic · Lords: 2</div>
+      <span class="clan-align align-con">Anti-Pact</span>
+      <p>Serve occult cults and dark sects with strong ties to demons. One lord is a direct servant of the demon Belial. Protocol: immediate retreat and specialist reinforcement.</p>
+    </div>
+    <div class="clan-card">
+      <div class="clan-name">Gorgoneias</div>
+      <div class="clan-concept">Concept: Intelligence · Lords: 1</div>
+      <span class="clan-align align-neu">Neutral</span>
+      <p>Scholarly and philosophical. Headquartered on the island of Lesbos. The only clan to openly serve a primordial Yuán zǔ vampire. Maturation ritual: defend an academic thesis.</p>
+    </div>
+  </div>
+
+  <div class="project-body three-col">
+    <div class="project-col">
+      <h4>Core System: The Vampiric Impulse</h4>
+      <p>The central mechanical tension: vampires are cursed with an insatiable need to drink human blood — but doing so degrades them, costing power and status. A Yuán zǔ (primordial) who yields becomes a lesser Lord. Recovery requires centuries of complete abstinence.</p>
+      <p>This creates a built-in internal conflict for every vampire regardless of alignment: their greatest temptation is also the thing that makes them weaker and easier to kill.</p>
+    </div>
+    <div class="project-col">
+      <h4>Operational Doctrine</h4>
+      <ul>
+        <li><strong>Phase Zero</strong> — No hunt begins without: target intelligence, terrain recon, nest identification, incursion plan with contingencies.</li>
+        <li><strong>Anvil and Hammer</strong> — Two-team pincer: one seals the main exit, the other drives the target from secondary routes into the Anvil's trap.</li>
+        <li><strong>The Hour Before Dawn</strong> — Optimal assault window when targets are fatigued and forced toward their lair.</li>
+        <li><strong>Pursuit Rule</strong> — Pursuit is a failure of planning. Only under specific conditions (silver-wounded, open terrain, dawn imminent).</li>
+        <li><strong>Velum Protocol</strong> — If a civilian witnesses combat, the primary objective shifts from eliminating the vampire to securing the witness.</li>
+      </ul>
+    </div>
+    <div class="project-col">
+      <h4>Legal &amp; Ethics Framework</h4>
+      <ul>
+        <li>Authority derives from the Velum Salomonis — a global concealment spell — not from any state.</li>
+        <li>Zero civilian casualties is a categorical imperative, not a preference.</li>
+        <li>Killing a civilian witness is punishable by expulsion and death.</li>
+        <li>Neutral clans are never attacked without provocation — Active Surveillance only.</li>
+        <li>A hunter who causes a Breach of the Veil must undertake an Expiation Rite: a solo mission to correct their error or die trying.</li>
+        <li>Three documented case studies (Night Eagle, The Prague Error, The Sevastopol Trap) used in training doctrine.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="quote-block" style="background:var(--vonder); border-color:var(--accent);">
+    <blockquote>"We are not killers; we are surgeons removing a cancer. Discipline is what separates us from the monsters."</blockquote>
+    <cite>— Vonderburg Codex, Part III: Hunter Legislation and Ethics</cite>
+  </div>
+</section>
+
+<!-- LO QUE DEMUESTRA EL TRABAJO -->
+<section id="methodology">
+  <div class="section-label">04 &nbsp; What This Work Demonstrates</div>
+  <div class="comp-grid">
+    <div class="comp-item">
+      <h4><em>Consistency</em> as a Design Principle</h4>
+      <div class="comp-bar"></div>
+      <p>Every system in my worlds operates the same way for everyone. Rudon's Immutable Laws apply to gods and students alike. Warp physics apply whether you are the Federation or a mercenary. Internal rules are non-negotiable — and that is what creates trust in a fictional world.</p>
+    </div>
+    <div class="comp-item">
+      <h4>Moral <em>Complexity</em> Without Both-Sidesism</h4>
+      <div class="comp-bar"></div>
+      <p>No faction in any of my projects is simply evil. Rudon's Matte Dragons are right in the diagnosis and wrong in the response. The Federation imprisons Espers out of fear, not malice. The Vonderburg clan hunts the monster that was once their own blood. Complexity is structured, not vague.</p>
+    </div>
+    <div class="comp-item">
+      <h4><em>Systemic</em> Plot Generation</h4>
+      <div class="comp-bar"></div>
+      <p>My worlds don't contain stories — they generate them. Rudon's 20+ plot seeds each pull on a different systemic thread. The open arcs in Blue Planet (Q, the Maint Cluster, Academia, the AI factory) are designed to destabilize the world at any narrative moment the team decides.</p>
+    </div>
+    <div class="comp-item">
+      <h4>Documents Written <em>for Other Creators</em></h4>
+      <div class="comp-bar"></div>
+      <p>A narrative bible is useless if only the author can navigate it. All three projects include explicit adaptation guides for creators, tone notes, sensory design references for illustrators and game masters, and visual guides for designers — written for cross-disciplinary teams.</p>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCIA -->
+<section id="experience">
+  <div class="section-label">05 &nbsp; Professional Experience</div>
+
+  <div class="exp-row">
+    <div class="exp-date">2024 – Present</div>
+    <div>
+      <div class="exp-title">Published Author &amp; Independent Narrative Consultant</div>
+      <div class="exp-org">Freelance / Remote</div>
+      <div class="exp-desc">Full authorial pipeline including editorial process management, personal branding, and literary distribution. Simultaneous development of the three narrative universes documented in this portfolio.</div>
+    </div>
+  </div>
+
+  <div class="exp-row">
+    <div class="exp-date">Oct – Dic 2025</div>
+    <div>
+      <div class="exp-title">Cinematographic Screenwriting Course</div>
+      <div class="exp-org">Centro Nacional Autónomo de Cinematografía (CNAC)</div>
+      <div class="exp-desc">Formal training in audiovisual narrative structure, adapted for long-form and episodic formats.</div>
+    </div>
+  </div>
+
+  <div class="exp-row">
+    <div class="exp-date">2024</div>
+    <div>
+      <div class="exp-title">Master's Degree — Esports Management</div>
+      <div class="exp-org">EBS Business School / IEBS, Spain</div>
+      <div class="exp-desc">Specialized business education combining game industry operations, community management, and strategic marketing.</div>
+    </div>
+  </div>
+
+  <div class="exp-row">
+    <div class="exp-date">Nov 2020 – Feb 2024</div>
+    <div>
+      <div class="exp-title">COO &amp; Project Manager</div>
+      <div class="exp-org">EVE Games Studios (Venezuela)</div>
+      <div class="exp-desc">Coordinated workflows across creative, development, and marketing teams using SCRUM methodology. Supervised project timelines (Gantt/JIRA) to ensure on-time delivery of digital products.</div>
+    </div>
+  </div>
+
+  <div class="exp-row">
+    <div class="exp-date">Nov 2021 – Sep 2023</div>
+    <div>
+      <div class="exp-title">Game Designer</div>
+      <div class="exp-org">Hello Monster (Spain – Remote)</div>
+      <div class="exp-desc">Designed the experience, rules, and mechanics to make the game engaging and compelling.</div>
+    </div>
+  </div>
+
+  <div class="exp-row">
+    <div class="exp-date">Feb 2022 – Feb 2024</div>
+    <div>
+      <div class="exp-title">Director of Marketing &amp; Operations</div>
+      <div class="exp-org">Fusion Esports (USA – Remote)</div>
+      <div class="exp-desc">Full coordination of the marketing and operations department. Influencer Marketing campaigns (+40% engagement in 6 months) and growth strategies (+200% community growth in one year).</div>
+    </div>
+  </div>
+
+  <div class="exp-row">
+    <div class="exp-date">Jun 2022 – Ene 2023</div>
+    <div>
+      <div class="exp-title">Ghost Screenwriter</div>
+      <div class="exp-org">YouTube Content Production</div>
+      <div class="exp-desc">Writing and coordination of audiovisual scripts for YouTube, including narrative structure, pacing, and voice direction.</div>
+    </div>
+  </div>
+
+  <div class="exp-row">
+    <div class="exp-date">Oct 2015 – Jun 2025</div>
+    <div>
+      <div class="exp-title">University Professor</div>
+      <div class="exp-org">Universidad Bolivariana de Venezuela</div>
+      <div class="exp-desc">Academic planning and instruction — a discipline requiring clear, structured communication of complex systems to diverse audiences. A direct analogue to writing creator documentation for cross-disciplinary game development teams.</div>
+    </div>
+  </div>
+
+</section>
+
+<!-- PIE / CONTACTO -->
+<footer id="contact">
+  <div>
+    <h2>Let's build<br/><em>worlds together.</em></h2>
+    <p>Open to narrative design, worldbuilding, and lore documentation roles in game development.</p>
+    <p>Available for: Full-time · Contract · Consulting</p>
+    <p style="margin-top:1rem;">
+      <a href="mailto:series852@gmail.com">series852@gmail.com</a><br/>
+      <a href="https://linkedin.com/in/cesartinocogg" target="_blank">linkedin.com/in/cesartinocogg</a><br/>
+      <a href="https://www.patreon.com/c/CesarTinocoGG" target="_blank">patreon.com/c/CesarTinocoGG</a><br/>
+      +58 412 596 21 83
+    </p>
+  </div>
+  <div class="footer-right">
+    <div class="label">Location</div>
+    <div class="info" style="margin-bottom:1.2rem;">Valencia, Carabobo, Venezuela</div>
+    <div class="label">Languages</div>
+    <div class="info" style="margin-bottom:1.2rem;">Spanish (native) · English (A2)</div>
+    <div class="label">Availability</div>
+    <div class="info">Remote · International</div>
+  </div>
+</footer>
+
+<div style="background:#0d0d0f; color:rgba(245,242,236,.25); font-family:'DM Mono',monospace; font-size:.62rem; letter-spacing:.1em; text-align:center; padding:.8rem; text-transform:uppercase;">
+  César Enrique Tinoco Fernández &nbsp;·&nbsp; Narrative Design Portfolio &nbsp;·&nbsp; All world systems, documents and designs are original works
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lb-overlay" id="lb-overlay" onclick="closeLightbox()">
+  <div class="lb-close" onclick="closeLightbox()" title="Close">&times;</div>
+  <img id="lb-img" src="" alt="Enlarged view" onclick="event.stopPropagation()"/>
+  <div class="lb-hint">ESC · click outside to close</div>
+</div>
+
+<script>
+  function openLightbox(src) {
+    if (!src || src.indexOf('TU_URL') !== -1) return;
+    var img = document.getElementById('lb-img');
+    var overlay = document.getElementById('lb-overlay');
+    img.src = src;
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    document.getElementById('lb-overlay').classList.remove('open');
+    document.getElementById('lb-img').src = '';
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeLightbox();
+  });
+</script>
+
+</body>
+</html>
