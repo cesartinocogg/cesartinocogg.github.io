@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Species Explorer · César Tinoco · Expanded Universe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Bebas+Neue&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --ink:       #0d0d0f;
+    --paper:     #f5f2ec;
+    --muted:     #888070;
+    --rule:      rgba(245, 242, 236, 0.2);
+    --rudon:     #8b4a1c;
+    --rudon-lt:  #f0d5b8;
+    --azul:      #1a3a5c;
+    --azul-lt:   #c0d8f0;
+    --vonder:    #3a1020;
+    --vonder-lt: #e8c0c8;
+    --accent:    #c8a860;
+    --bg-sec:    #161619;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  
+  body {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    background: var(--ink);
+    color: var(--paper);
+    font-size: 18px;
+    line-height: 1.65;
+  }
+
+  #sx { padding: 4rem 5rem; max-width: 1400px; margin: 0 auto; }
+  
+  .sx-hdr {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--accent);
+    margin-bottom: 2.5rem;
+  }
+  .sx-hdr h2 { 
+    font-size: clamp(2rem, 4vw, 3.2rem); 
+    font-weight: 300; 
+    line-height: 1.2; 
+    letter-spacing: -.01em;
+    margin: 0;
+  }
+  .sx-hdr span { 
+    font-family: 'DM Mono', monospace; 
+    font-size: .75rem; 
+    letter-spacing: .18em; 
+    text-transform: uppercase; 
+    color: var(--accent);
+    align-self: flex-end;
+  }
+  .portfolio-btn {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background: transparent;
+    border: 1px solid var(--rule);
+    padding: 0.5rem 1.2rem;
+    border-radius: 0;
+    color: var(--paper);
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s, background 0.2s;
+    display: inline-block;
+    align-self: center;
+  }
+  .portfolio-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(200, 168, 96, 0.08);
+  }
+
+  .world-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-bottom: 2.5rem; }
+  .wcard { 
+    cursor: pointer; background: var(--bg-sec); border: 1px solid var(--rule); 
+    overflow: hidden; transition: border-color .2s, transform .2s; position: relative; 
+  }
+  .wcard:hover { transform: translateY(-4px); border-color: var(--muted); }
+  .wcard.active { border-width: 2px; }
+  .wcard-img { width: 100%; aspect-ratio: 16/7; object-fit: cover; display: block; opacity: 0.8; transition: opacity .2s; }
+  .wcard:hover .wcard-img { opacity: 1; }
+  .wcard-bar { position: absolute; left: 0; top: 0; bottom: 0; width: 4px; }
+  .wcard-info { padding: 1.2rem 1.5rem; }
+  .wcard-genre { font-family: 'DM Mono', monospace; font-size: .65rem; letter-spacing: .18em; text-transform: uppercase; margin-bottom: .4rem; }
+  .wcard-name { font-size: 1.4rem; font-weight: 300; line-height: 1.2; }
+  .wcard-count { font-family: 'DM Mono', monospace; font-size: .65rem; margin-top: .5rem; color: rgba(245,242,236,.6); letter-spacing: .1em; text-transform: uppercase; }
+
+  .sx-toolbar { 
+    display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; 
+    background: var(--bg-sec); padding: .8rem 1.2rem; border: 1px solid var(--rule); 
+  }
+  .sx-filter { 
+    flex: 1; background: transparent; border: none; color: var(--paper); 
+    font-family: 'DM Mono', monospace; font-size: .8rem; outline: none; letter-spacing: .05em; 
+  }
+  .sx-filter::placeholder { color: rgba(245,242,236,.3); }
+  .sx-label { font-family: 'DM Mono', monospace; font-size: .7rem; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin-left: auto; }
+
+  .sp-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1.5rem; }
+  .spcard { 
+    cursor: pointer; aspect-ratio: 2/3; position: relative; overflow: hidden; 
+    border: 1px solid var(--rule); transition: transform .25s, border-color .2s; background: var(--bg-sec);
+  }
+  .spcard:hover { transform: translateY(-4px) scale(1.02); }
+  .spcard-img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .3s; opacity: 0.85; }
+  .spcard:hover .spcard-img { transform: scale(1.05); opacity: 1; }
+  .spcard-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(13,13,15,.95) 0%, rgba(13,13,15,.6) 40%, transparent 70%); }
+  .spcard-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 1rem; }
+  .spcard-concept { font-family: 'DM Mono', monospace; font-size: .55rem; letter-spacing: .12em; text-transform: uppercase; margin-bottom: .3rem; opacity: .9; }
+  .spcard-name { font-size: 1.1rem; font-weight: 400; line-height: 1.2; margin-bottom: .5rem; }
+  .tags-mini { display: flex; gap: .3rem; flex-wrap: wrap; }
+  .tag-mini { font-family: 'DM Mono', monospace; font-size: .5rem; letter-spacing: .08em; padding: .15rem .4rem; border: 1px solid; opacity: .8; text-transform: uppercase; }
+
+  .modal-wrap { display: none; position: fixed; inset: 0; z-index: 1000; align-items: center; justify-content: center; padding: 2rem; }
+  .modal-wrap.open { display: flex; animation: fadeIn .2s ease; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .modal-bg { position: absolute; inset: 0; background: rgba(0,0,0,.9); cursor: zoom-out; }
+  .modal-box { 
+    position: relative; z-index: 1; display: flex; width: 100%; max-width: 900px; max-height: 85vh; 
+    background: var(--ink); border: 1px solid var(--rule); overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+  }
+  .modal-img-wrap { width: 35%; flex-shrink: 0; position: relative; background: var(--bg-sec); }
+  .modal-img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0.9; filter: grayscale(15%); }
+  .modal-body { flex: 1; overflow-y: auto; padding: 3rem 4rem; }
+  .modal-project { font-family: 'DM Mono', monospace; font-size: .68rem; letter-spacing: .18em; text-transform: uppercase; margin-bottom: .8rem; }
+  .modal-name { font-size: clamp(2rem, 3vw, 2.8rem); font-weight: 300; line-height: 1.1; margin-bottom: .8rem; letter-spacing: -.01em; }
+  .modal-concept { font-size: 1.12rem; font-style: italic; color: rgba(245,242,236,.65); margin-bottom: 1.5rem; line-height: 1.6; }
+  .modal-tags { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 2.5rem; }
+  .modal-tag { font-family: 'DM Mono', monospace; font-size: .65rem; letter-spacing: .1em; text-transform: uppercase; padding: .3rem .8rem; border: 1px solid; }
+  .modal-divider { border-top: 1px solid var(--rule); margin: 2rem 0; height: 0; }
+  .modal-section { margin-bottom: 1.8rem; }
+  .modal-sec-label { font-family: 'DM Mono', monospace; font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; margin-bottom: .8rem; padding-bottom: .4rem; border-bottom: 1px solid var(--rule); color: var(--muted); }
+  .modal-sec-body { font-size: 1rem; line-height: 1.65; color: rgba(245,242,236,.85); }
+  .modal-close { position: absolute; top: 1.2rem; right: 1.5rem; background: none; border: none; font-size: 2.5rem; cursor: pointer; color: var(--paper); line-height: 1; z-index: 2; font-family: 'DM Mono', monospace; opacity: .6; transition: opacity .2s; }
+  .modal-close:hover { opacity: 1; }
+  .empty { padding: 4rem 2rem; text-align: center; font-family: 'DM Mono', monospace; font-size: .8rem; letter-spacing: .1em; color: var(--muted); text-transform: uppercase; }
+
+  @media (max-width: 900px) {
+    #sx { padding: 2rem 1.5rem; }
+    .world-row { grid-template-columns: 1fr; }
+    .modal-box { flex-direction: column; overflow-y: auto; }
+    .modal-img-wrap { width: 100%; height: 200px; }
+    .modal-body { padding: 2rem 1.5rem; overflow-y: visible; }
+    .modal-close { top: .5rem; right: .8rem; }
+    .sx-hdr {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .portfolio-btn {
+      align-self: flex-start;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div id="sx">
+  <div class="sx-hdr">
+    <h2>Species Explorer</h2>
+    <a href="index.html" class="portfolio-btn">Portfolio</a>
+    <a href="species_es.html" class="portfolio-btn">Español</a>
+    <span id="sx-meta"></span>
+  </div>
+  <div class="world-row" id="world-row"></div>
+  <div class="sx-toolbar">
+    <input class="sx-filter" id="sx-filter" placeholder="Search species, concept or trait…"/>
+    <span class="sx-label" id="sx-count"></span>
+  </div>
+  <div class="sp-grid" id="sp-grid"></div>
+  <div class="modal-wrap" id="modal-wrap">
+    <div class="modal-bg" id="modal-bg"></div>
+    <div class="modal-box" id="modal-box">
+      <div class="modal-img-wrap">
+        <img class="modal-img" id="m-img" src="" alt=""/>
+        <div id="m-bar" style="position:absolute;left:0;top:0;bottom:0;width:6px;"></div>
+      </div>
+      <div class="modal-body">
+        <div class="modal-project" id="m-project"></div>
+        <div class="modal-name" id="m-name"></div>
+        <div class="modal-concept" id="m-concept"></div>
+        <div class="modal-tags" id="m-tags"></div>
+        <div class="modal-section"><div class="modal-sec-label" id="m-l1">Morphology / Biology</div><div class="modal-sec-body" id="m-s1"></div></div>
+        <div class="modal-section"><div class="modal-sec-label" id="m-l2">Culture & Society</div><div class="modal-sec-body" id="m-s2"></div></div>
+        <div class="modal-section"><div class="modal-sec-label" id="m-l3">Narrative Role</div><div class="modal-sec-body" id="m-s3"></div></div>
+      </div>
+      <button class="modal-close" id="modal-close" title="Close">×</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ======================== SVG UTILITIES ==========================
+function mkSVG(bg,ac,lt,pat="hex"){
+  const P={
+    scales:`<path d="M55,55 Q105,30 155,55 Q205,30 255,55" fill="none" stroke="${ac}" stroke-width="1.5" opacity=".3"/><path d="M35,92 Q85,67 135,92 Q185,67 235,92 Q280,67 300,92" fill="none" stroke="${ac}" stroke-width="1.4" opacity=".2"/><path d="M55,128 Q105,103 155,128 Q205,103 255,128" fill="none" stroke="${ac}" stroke-width="1.2" opacity=".15"/>`,
+    hex:`<polygon points="150,22 218,60 218,138 150,176 82,138 82,60" fill="none" stroke="${ac}" stroke-width="1.2" opacity=".3"/><polygon points="150,52 198,78 198,132 150,158 102,132 102,78" fill="none" stroke="${ac}" stroke-width=".8" opacity=".15"/>`,
+    circle:`<circle cx="150" cy="105" r="72" fill="none" stroke="${ac}" stroke-width="1.2" opacity=".3"/><circle cx="150" cy="105" r="46" fill="none" stroke="${ac}" stroke-width=".8" opacity=".2"/><circle cx="150" cy="105" r="20" fill="${ac}" opacity=".15"/>`,
+    crystal:`<polygon points="150,14 196,78 185,168 115,168 104,78" fill="none" stroke="${ac}" stroke-width="1.2" opacity=".3"/><line x1="127" y1="14" x2="150" y2="168" stroke="${ac}" stroke-width=".6" opacity=".15"/><line x1="173" y1="14" x2="150" y2="168" stroke="${ac}" stroke-width=".6" opacity=".15"/>`,
+    wave:`<path d="M36,86 Q78,50 118,86 Q160,122 202,86 Q244,50 276,86" fill="none" stroke="${ac}" stroke-width="1.5" opacity=".3"/><path d="M36,118 Q78,82 118,118 Q160,154 202,118 Q244,82 276,118" fill="none" stroke="${ac}" stroke-width="1" opacity=".2"/>`,
+    gothic:`<path d="M150,18 L170,58 L202,58 L178,80 L188,114 L150,93 L112,114 L122,80 L98,58 L130,58 Z" fill="none" stroke="${ac}" stroke-width="1.2" opacity=".3"/><rect x="134" y="58" width="32" height="52" fill="none" stroke="${ac}" stroke-width=".8" opacity=".15" rx="16"/>`
+  };
+  const s=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 380"><rect width="300" height="380" fill="${bg}"/><rect width="300" height="380" fill="${ac}" opacity=".08"/>${P[pat]||P.hex}<text x="150" y="245" font-family="Georgia,serif" font-size="70" font-weight="bold" text-anchor="middle" fill="${ac}" opacity=".2">${lt}</text><rect x="0" y="0" width="5" height="380" fill="${ac}" opacity=".85"/></svg>`;
+  return "data:image/svg+xml,"+encodeURIComponent(s);
+}
+function mkProj(bg,ac,lbl){
+  const s=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 220"><rect width="600" height="220" fill="${bg}"/><text x="300" y="130" font-family="Georgia,serif" font-size="100" font-weight="bold" text-anchor="middle" fill="${ac}" opacity=".15">${lbl}</text><rect x="0" y="0" width="7" height="220" fill="${ac}" opacity=".9"/><text x="28" y="192" font-family="monospace" font-size="8" fill="${ac}" opacity=".4" letter-spacing="3">PROJECT IMAGE</text></svg>`;
+  return "data:image/svg+xml,"+encodeURIComponent(s);
+}
+const cRudon = "#8b4a1c", cRudonLt = "#f0d5b8";
+const cAzul = "#1a3a5c", cAzulLt = "#c0d8f0";
+const cVonder = "#3a1020", cVonderLt = "#e8c0c8";
+
+// ========== COMPLETE DATA FROM THE THREE DOCUMENTS ==========
+// RUDON UNIVERSE (dragons, humans, intelligent creatures)
+const rudonSpecies = [
+  {id:"rud_humens",name:"Humens",concept:"Warriors · Versatile mages",tags:["Human","Majority","Magic"],morph:"Hairless, beardless humanoids. The most widespread human species, great users of magic and combat.",culture:"Main inhabitants of human kingdoms (Arron, Alexandria, Susen). They dominate politics and war in Miskalia.",narrative:"Created by Yun, they were divided into four species after the death of Titan Agripa. The Humens are the military backbone of humanity.",img:mkSVG("#120905",cRudonLt,"HM","hex")},
+  {id:"rud_vayuns",name:"Vayuns",concept:"Scientists · Isolationists",tags:["Reptilian","Brumation","Great Vayun Nation"],morph:"Humanoids with reptilian features. Soft scales, vertical eyes. They enter torpor during extreme cold months (Criodais, Criomensi).",culture:"Isolated in the Great Vayun Nation. Natural scientists, they study magic with rigorous methodology. They only trade with Alexandria.",narrative:"Guardians of ancestral knowledge. Their winter brumation is a biological mystery that makes them vulnerable yet respected.",img:mkSVG("#102010",cRudonLt,"VY","scales")},
+  {id:"rud_nykuns",name:"Nykuns",concept:"Nomads · Stealthy gatherers",tags:["Furry","Tail","Mihusus"],morph:"Furry humanoids with long ears and a prehensile tail. Eyes adapted to twilight.",culture:"Nomads living off gathering and trade. Adapted to go unnoticed by the Mihusus. They build no permanent cities.",narrative:"The elusive ones. Their ability to move undetected makes them the best explorers and smugglers of Rudon.",img:mkSVG("#1a1a10",cRudonLt,"NK","wave")},
+  {id:"rud_wongs",name:"Wongs",concept:"Farmers · Brute force",tags:["Horns","Rare","Physical combat"],morph:"Humanoids with velvety horns, robust build. Higher bone density than other humans.",culture:"Rare, dedicated to agriculture in fertile regions. In combat they are brutal and resilient.",narrative:"The peasant warriors. Though mostly peaceful, when enraged they can tear armor with bare hands.",img:mkSVG("#1a1005",cRudonLt,"WN","circle")},
+  {id:"rud_dorados",name:"Golden Dragons",concept:"Natural leaders · Wise",tags:["Metallic","Kings","Nest"],morph:"Shining golden scales. 2-2.5m adults. Six-limbed membranous wings. Majestic flight.",culture:"Leaders of metallic nests. Coveted as kings by other scales. Great wisdom and diplomatic skill.",narrative:"The backbone of the draconic alliance. Their queen is the highest authority in metallic clans.",img:mkSVG("#1a1205",cRudonLt,"DR","scales")},
+  {id:"rud_plateados",name:"Silver Dragons",concept:"Mages · Historians",tags:["Metallic","Ether","Libraries"],morph:"Silver scales shining in moonlight. Skilled in Ethernergia manipulation.",culture:"Guardians of history. Preserve knowledge in hexagonal libraries. Their magical chant is legendary.",narrative:"The archivists of Rudon. Without them, the memory of the Dragon Wars would have been lost.",img:mkSVG("#11151a",cRudonLt,"PL","hex")},
+  {id:"rud_broncineos",name:"Bronze Dragons",concept:"Strategists · Tacticians",tags:["Metallic","War","Formations"],morph:"Bronze-colored scales, robust. Broad wings for close maneuvers.",culture:"Experts in battle and tactics. Lead flight formations in combat.",narrative:"The battle masters. Their presence in the sky organizes the chaos of war.",img:mkSVG("#1a1008",cRudonLt,"BR","gothic")},
+  {id:"rud_ocres",name:"Ocher Dragons",concept:"Builders · Agricultural",tags:["Metallic","Architecture","Terraces"],morph:"Earth-toned ocher scales. Broad claws for digging and building.",culture:"Build the hexagonal towers of the nests. Experts in agriculture and aqueducts.",narrative:"The forgotten engineers. Without them, dragon nests would lack their impressive cities.",img:mkSVG("#1a140a",cRudonLt,"OC","wave")},
+  {id:"rud_cobrizos",name:"Copper Dragons",concept:"Diplomats · Traders",tags:["Metallic","Barter","Merchants"],morph:"Copper scales with orange reflections. Agile flight, ideal for long distances.",culture:"Natural diplomats and excellent traders. Maintain routes between nests and human kingdoms.",narrative:"The winged ambassadors. Their barter network sustains Rudon's economy.",img:mkSVG("#1a0e05",cRudonLt,"CO","circle")},
+  {id:"rud_rojos",name:"Red Dragons",concept:"Fierce warriors",tags:["Matte","Physical strength","Attack"],morph:"Blood-red scales, muscular. The physically strongest among dragons.",culture:"Warlike and proud. They often start conflicts with humans.",narrative:"The wrath of the matte scales. In the dragon war they were the vanguard against the metallic scales.",img:mkSVG("#1a0805",cRudonLt,"RJ","scales")},
+  {id:"rud_negros",name:"Black Dragons",concept:"Brutal mages",tags:["Matte","Destructive magic","Betrayal"],morph:"Matte black scales, red eyes. The best mages among dragons, specialized in vile magic.",culture:"Betrayed the pact of Luna. Now hunted by humans and metallics.",narrative:"The fallen ones. Their unbridled ambition cost them the favor of the gods.",img:mkSVG("#0d0d0f",cRudonLt,"NG","hex")},
+  {id:"rud_azules",name:"Blue Dragons",concept:"Maritime sages",tags:["Matte","Ocean","Calm"],morph:"Deep blue scales. Live near the sea, hydrophobic scales.",culture:"Calm sages. Mediate between clans and study magical tides.",narrative:"The philosophers of the coast. Their wisdom is respected even by metallics.",img:mkSVG("#0a1420",cRudonLt,"AZ","wave")},
+  {id:"rud_verdes",name:"Green Dragons",concept:"Magical farmers",tags:["Matte","Nutrients","Pagoh"],morph:"Emerald green scales. Specialized in cultivating magical plants.",culture:"Main producers of nutrients for mages. Trade with all factions.",narrative:"The sustainers. Without their harvests, magic would be much weaker in Rudon.",img:mkSVG("#0a1a0a",cRudonLt,"VD","circle")},
+  {id:"rud_blancos",name:"White Dragons",concept:"Scientists · Mathematicians",tags:["Matte","Cryomancy","Logic"],morph:"Snow-white scales. Adapted to extreme cold. Frost breath.",culture:"The best scientists and mathematicians. Design calendars and predict Sira and Muna cycles.",narrative:"The brains of Rudon. Their obsession with numbers created the month and hour system.",img:mkSVG("#151515",cRudonLt,"BC","crystal")},
+  {id:"rud_gemas",name:"Gem-Scale Dragons",concept:"Subterranean · Living jewels",tags:["Diamond","Emerald","Sapphire"],morph:"Crystalline scales like gems. Live under mountains. Glow with their own light.",culture:"Few nests, isolated. Their architecture is inverted: towers that grow downward.",narrative:"The wandering treasures. Their skin is valuable, so they hide jealously.",img:mkSVG("#101018",cRudonLt,"GM","crystal")},
+  {id:"rud_platinos",name:"Platinum Dragons",concept:"Rare · High mountains",tags:["Mutation","Sages","Ancestral"],morph:"Iridescent platinum scales. Live on the highest peaks. Very long-lived.",culture:"Few individuals. Respected as advisors to dragon kings.",narrative:"The hermits of the clouds. They speak with the gods.",img:mkSVG("#141a1f",cRudonLt,"PT","gothic")},
+  {id:"rud_marinos",name:"Sea Dragons",concept:"Oceanic · 4 limbs",tags:["Sea","Pearlescent","Depths"],morph:"Four limbs instead of six. Hydrodynamic pearlescent scales. Aquatic breathing.",culture:"Live under the sea. Build horizontal nests. Allies of Tiamat.",narrative:"The guardians of the depths. Sink ships that pollute their seas.",img:mkSVG("#0a1015",cRudonLt,"MR","wave")},
+  {id:"rud_celestiales",name:"Celestial Dragons",concept:"Royal mutation · Infertile",tags:["Rulers","5 meters","Sages"],morph:"Extremely long (up to 5m). Starlight wings. Cannot reproduce.",culture:"Born from the ruling class. They are strategists, mages and sages, but their line ends with them.",narrative:"The sacrificed for power. Their knowledge is immense, their legacy null.",img:mkSVG("#0a0a1a",cRudonLt,"CEL","circle")},
+  {id:"rud_alejandrita",name:"Alexandrite Dragons",concept:"Last nest · Hidden",tags:["Gem","Alexandria","Secret"],morph:"Scales that change color (green to red). Very few individuals.",culture:"A single nest survives hidden beneath Alexandria castle. Protected by the royal family.",narrative:"The hidden treasure. Their existence is a secret that could change human politics.",img:mkSVG("#1a0812",cRudonLt,"AX","scales")},
+  {id:"rud_tiamat",name:"Tiamat",concept:"Unique creature · Five heads",tags:["Dragon goddess","Oceanic","Depths"],morph:"Five independent heads with their own vocal apparatus. Immeasurable length.",culture:"Created by Yun. Lives in the depths. Sinks ships regularly.",narrative:"Someone gave her information about Comestio's supply ship. That question — who — opens one of the most dangerous arcs.",img:mkSVG("#0a0a12",cRudonLt,"TIA","scales")},
+  {id:"rud_aranas",name:"Ñaro Canyon Spiders",concept:"Predator · Ethereal neutralizer",tags:["Negotiable","Anti-magic","Webs"],morph:"Large arachnids. Webs that neutralize Ethernergia. 400kg loads on vertical walls.",culture:"Not domesticated — negotiated with. Safe routes in exchange for crops.",narrative:"They have begun to reject routes without apparent problem. Vokalung suspects they respond to changes in ethereal flow.",img:mkSVG("#1a0a04",cRudonLt,"AR","wave")},
+  {id:"rud_unicornios",name:"Unicorns",concept:"Corruption detector",tags:["Pure mount","Incorruptible","Ethereal plane"],morph:"Equine appearance with a one-meter horn. In the presence of ethereal corruption, they vanish to the ethereal plane.",culture:"Only ridden by pure Kinergia. Infallible corruption detectors.",narrative:"A unicorn that refuses to be ridden is top-tier strategic information.",img:mkSVG("#151020",cRudonLt,"UN","circle")},
+  {id:"rud_varberians",name:"Varberians",concept:"Cursed humans · Animal transformation",tags:["Ethereal curse","Northern Drakonia","Wolves"],morph:"Humanoids with involuntary animal transformations. In exposed generations, transformation can be permanent.",culture:"Born into the curse. Live in northern Drakonia. A living example of the danger of uncontrolled Ethernergia.",narrative:"The most powerful argument for Rudon's Pillar II: without understanding, Ethernergia destroys.",img:mkSVG("#14100a",cRudonLt,"VB","hex")}
+];
+
+// PLANETA AZUL UNIVERSE (all intelligent species from the catalogue)
+const azulSpecies = [
+  {id:"az_humanos",name:"Humans (Federation)",concept:"Founding species · Adaptable",tags:["Simian","Expansive","Corporatist"],morph:"Simian humanoids. High adaptability to extreme environments.",culture:"Founders of the Universal Species Federation. Politically complex, culturally diverse.",narrative:"They lost Earth and the Moon, but built a galactic civilization. The Blue Poem is their elegy.",img:mkSVG("#0a1015",cAzulLt,"H","hex")},
+  {id:"az_gotat",name:"Gotat",concept:"Allied founders · Facial exoskeleton",tags:["Carbon-silicon","Blue blood","Ectotherms"],morph:"Upright bipeds with a polished ivory facial exoskeleton. Mobile 15-20cm ears. Hemocyanin (blue) blood.",culture:"First human allied species. After an initial war they signed a collaboration agreement. Militaristic and scientific society.",narrative:"Their blue blood and chameleon skin make them unique. Their loyalty to the Federation is unshakeable.",img:mkSVG("#0a1010",cAzulLt,"GT","scales")},
+  {id:"az_manton",name:"Manton",concept:"Liberated · Peaceful",tags:["Cervid","Agricultural","L0L0 8-5"],morph:"Cervid humanoids. Small antlers, soft fur.",culture:"Enslaved by the Wilstoide, freed by the Federation. Agricultural and peaceful culture.",narrative:"Those who never forgot the yoke. Their gratitude to the Federation is absolute.",img:mkSVG("#10150a",cAzulLt,"MN","circle")},
+  {id:"az_waltean",name:"Waltean",concept:"Hunters · Explorers",tags:["Canine","Honor","L0L0 8-5"],morph:"Canine humanoids. Keen sense of smell and fierce loyalty.",culture:"Hunters turned stellar explorers. Great sense of honor.",narrative:"The hounds of the Federation. Always on the frontier, always alert.",img:mkSVG("#12100a",cAzulLt,"WL","wave")},
+  {id:"az_kitoran",name:"Kitoran",concept:"Natural diplomats",tags:["Feline","Mediators","L0L0 8-5"],morph:"Feline humanoids. Vertical pupils, supreme agility.",culture:"Natural diplomats. Their mediators are recognized throughout the Federation.",narrative:"Those who heal wounds with words. Without them, the Federation would have fragmented centuries ago.",img:mkSVG("#101018",cAzulLt,"KT","gothic")},
+  {id:"az_roptus",name:"Roptus",concept:"Engineers · Builders",tags:["Elephantid","Mara modules","IDSS"],morph:"Elephantid humanoids. Prehensile trunk, prodigious memory.",culture:"Key engineers in the expansion of ISS Nirvana. Masters of Mara modularity.",narrative:"The architects of space. Every Mara ship bears their mark.",img:mkSVG("#15100a",cAzulLt,"RP","hex")},
+  {id:"az_biertas",name:"Biertas",concept:"Agile · Messengers",tags:["Leporine","Logistics","Speed"],morph:"Leporine humanoids. Long legs, ears, ultra-fast reflexes.",culture:"Specialists in logistics and interstellar messaging. The backbone of federal mail.",narrative:"Those who never arrive late. Their physical communication network is irreplaceable.",img:mkSVG("#12100a",cAzulLt,"BI","wave")},
+  {id:"az_lateo",name:"Lateo",concept:"Involuntary mystics",tags:["Amphibian","Deep Exudate","Eyes of the Deep"],morph:"Amphibian bipeds, translucent dermis. They secrete Deep Exudate that induces mystical states in other species.",culture:"Ancient philosophical civilization. Their biology originated the cult 'Eyes of the Deep'.",narrative:"Is a being responsible for what its biology produces in other minds? The Lateo ethical debate is central.",img:mkSVG("#0a1515",cAzulLt,"LT","crystal")},
+  {id:"az_voistum",name:"Voistum",concept:"Navigators · Cartographers",tags:["Arachnid","Wormholes","Maps"],morph:"Arachnid centauroids. Eight limbs, unique spatial perception.",culture:"Specialists in wormhole navigation. Their maps are the most accurate in the galaxy.",narrative:"The route weavers. Without them, wormholes would be deadly labyrinths.",img:mkSVG("#10101a",cAzulLt,"VO","hex")},
+  {id:"az_eoalo",name:"Eoalo",concept:"Luminous spheres · Incomprehensible technology",tags:["Trifrequency","Never defeated","Independent"],morph:"Luminous spheres 0.5 to 3 m. Light appendages. Three-frequency communication; Gamma is indecipherable.",culture:"The most advanced civilization. Neutral, they observe without intervening. Warp from ~50,000 years ago.",narrative:"Why do they observe and never intervene? Are wormholes their creation or their breath?",img:mkSVG("#0a0a1a",cAzulLt,"EO","circle")},
+  {id:"az_uteo",name:"Uteo",concept:"Crystalline mineral · Collective sacrifice",tags:["Silicon","Dormant","The Ente"],morph:"Crystalline mineral structure. Planet Xyren is a single organism: The Jewel.",culture:"Civilization in voluntary sacrifice for 3000 years to contain the Ente. One representative remains awake.",narrative:"The Jewel has been emitting a scream for three thousand years that no one can translate. When containment fails…",img:mkSVG("#0a1012",cAzulLt,"UT","crystal")},
+  {id:"az_esmiyuga",name:"Esmiyuga",concept:"Obligate symbiont",tags:["Vermiform","Bond","Path of the Bond"],morph:"Vermiform ~40 cm. Integrates into host's nervous system. Separation kills the host.",culture:"Founders of the Path of the Bond. The Federation requires a 90-day waiting period for bonding.",narrative:"'Death is also irreversible and no one asks consent to be born.' The central ethical debate.",img:mkSVG("#0a0a0a",cAzulLt,"ES","wave")},
+  {id:"az_wilstoide",name:"Wilstoide",concept:"Reptiloid empire · Supremacists",tags:["Scales","Triumvirate","Scaled Design"],morph:"Reptiloid bipeds with hexagonal micro-scales, deciduous branching horns, cranial crest, robust tail. Lifespan 150-200 years.",culture:"Aristocratic military republic. Vassalage of species like the Aheros. Historical enemies of the Federation.",narrative:"They are not simply evil: they have a coherent internal logic. The Scaled Design is hate ideology for the Federation.",img:mkSVG("#121212",cAzulLt,"WS","scales")},
+  {id:"az_maint",name:"Maint",concept:"Winged humanoids · Isolated",tags:["Horns","Hip wings","Prehensile tail"],morph:"Humanoids with keratin horns, functional hip wings, prehensile tail. Real atmospheric flight.",culture:"Cluster isolated when its wormhole closed. Talented engineers. Heiress Ben Ari has her daughter trapped there.",narrative:"What Yejekia Ben Ari sacrifices to save her daughter defines one of the most complex moral arcs.",img:mkSVG("#0a0a0f",cAzulLt,"MA","gothic")},
+  {id:"az_aeon",name:"Aeon",concept:"Philosophers · Dieselpunk aesthetic",tags:["Octopod","Ozymandias","Technocracy"],morph:"Octopod humanoids. Four functional arms, skin with changing patterns.",culture:"Philosophers and academics. Built Ozymandias Station. Dieselpunk aesthetic.",narrative:"The thinkers of the void. Their masterpiece is a monument to knowledge.",img:mkSVG("#151510",cAzulLt,"AE","circle")},
+  {id:"az_gipt",name:"Gipt",concept:"Biologists · Atompunk aesthetic",tags:["Insectoid","Expeditions","New Europa"],morph:"Insectoid humanoids. Compound eyes, neon wings.",culture:"Field biologists. Conduct scientific expeditions to unexplored corners.",narrative:"The catalogers of the living. Their obsession with taxonomy is legendary.",img:mkSVG("#10101a",cAzulLt,"GI","hex")},
+  {id:"az_kquiverones",name:"Kquiverones",concept:"Emerging species · Great potential",tags:["Young","Adacai","Integration"],morph:"Fine-featured humanoids. Accelerated metabolism.",culture:"Young species in process of integration into the Federation. Great technological potential.",narrative:"The apprentices. Their future is not yet written.",img:mkSVG("#121215",cAzulLt,"KQ","wave")},
+  {id:"az_josu",name:"Josu",concept:"Traders · Smugglers",tags:["Goth 6-6-6","Unguligrade","Neutral"],morph:"Unguligrade bipeds, curved horns.",culture:"Natives of the penal cluster Goth 6-6-6. Renowned traders and smugglers.",narrative:"Where there's an illegal deal, there's a Josu. They don't judge the goods, only the price.",img:mkSVG("#141010",cAzulLt,"JO","gothic")},
+  {id:"az_anigodet",name:"Anigodet",concept:"Messengers · Aviary",tags:["Feathers","Flight","Explorers"],morph:"Aviary bipeds, functional wings, curved beak.",culture:"Messengers and explorers. Colonies on the most remote planets.",narrative:"Those who see the sunrise from space. Their resistance to vacuum is astonishing.",img:mkSVG("#101015",cAzulLt,"AN","circle")},
+  {id:"az_loct",name:"Loct",concept:"Fluid engineers",tags:["Gill-breathing","Water","Recycling"],morph:"Gill-breathing amphibians, slimy skin, bulging eyes.",culture:"Designed the Mara water recycling systems. Masters of hydraulics.",narrative:"The water you drink on a Mara ship passed through their hands.",img:mkSVG("#0a1515",cAzulLt,"LC","wave")},
+  {id:"az_etio",name:"Etio",concept:"Distributed intelligence",tags:["Insectoid","Colony","Collective decisions"],morph:"Insectoid bipeds with communicating antennae.",culture:"Social colony with distributed intelligence. Decisions are always collective.",narrative:"There is no Etio individuality. Only the colony.",img:mkSVG("#121210",cAzulLt,"ET","hex")},
+  {id:"az_rustintee",name:"Rustintee",concept:"Miners · Metallurgists",tags:["Ursid","Materials","Mara modules"],morph:"Quadrupedal ursids, carbide claws.",culture:"Miners and metallurgists. Supply materials for Mara modules.",narrative:"Those who dig in asteroids. Their strength is proverbial.",img:mkSVG("#15100a",cAzulLt,"RS","scales")}
+];
+
+// VONDERBURG UNIVERSE (vampire clans, not categories)
+const vonderSpecies = [
+  {id:"von_draskull",name:"Draskull Clan",concept:"Dominion · Territorial lords",tags:["Pro-Pact","5 Lords","Emperor's Codex"],morph:"Indistinguishable from humans at rest, but their presence changes a room when they enter. Hypnotic gaze.",culture:"The most numerous and organized clan. Rotating governance among three Lords every ten years. Personality cults.",narrative:"The most dangerous clan not for its violence but for its structure. When the Pact breaks, they will already have plans.",img:mkSVG("#0a0a0a",cVonderLt,"DR","gothic")},
+  {id:"von_vurdalok",name:"Vurdalok Clan",concept:"Occult · Blood traitors",tags:["Anti-Pact","3 Lords","Open hunt"],morph:"Innate ability to manipulate shadows and lies. Their eyes glow in darkness.",culture:"Founded by Dimitri Vurdalok, former Vonderburg hunter. Main target of the Vonderburg clan. Open hunt authorized.",narrative:"Inherited hatred as operational engine. The mission to avenge Dimitri's betrayal is personal for every generation.",img:mkSVG("#120a0a",cVonderLt,"VU","hex")},
+  {id:"von_borgias",name:"Borgias Clan",concept:"Subterfuge · Shadows of power",tags:["Neutral","2 Lords","Infiltrated"],morph:"Physically perfect at imitating human elites. They perfect the art of appearing what they are not.",culture:"Control mafias, banks and corporations. Natural enemies of the Carniolas.",narrative:"Neutral because stability suits them. The day they stop being so, half of finance will be on the wrong side.",img:mkSVG("#0a0a05",cVonderLt,"BO","gothic")},
+  {id:"von_tzimacan",name:"Tzimacan Clan",concept:"Form · Forest brothers",tags:["Pro-Pact","3 Lords","Animal bond"],morph:"Ability to modify their own form and that of others. Transformation into companion animals.",culture:"Secluded in deep forests. The conversion ritual creates a lifelong bond with an animal.",narrative:"Never broken the Pact — genuinely prefer peace. Their docility is not weakness.",img:mkSVG("#0a1008",cVonderLt,"TZ","wave")},
+  {id:"von_rangda",name:"Rangda Clan",concept:"Magic · Servants of the abyss",tags:["Anti-Pact","2 Lords","Demonic nexus"],morph:"Eyes that develop impossible-to-cover colorations. Demonic marks on skin.",culture:"Serve occult cults. One Lord is a direct servant of the demon Belial.",narrative:"Vonderburg protocol: immediate retreat. The hunter unprepared for the demonic dimension does not return.",img:mkSVG("#120808",cVonderLt,"RG","crystal")},
+  {id:"von_gorgoneias",name:"Gorgoneias Clan",concept:"Intelligence · Eternal academics",tags:["Neutral","1 Lord","Visible Yuán Zǔ"],morph:"Supernatural attractiveness, but their attention is so intense it becomes disturbing.",culture:"Scholars based in Lesbos. Only clan that openly serves a primordial vampire (Gorgon). Maturation ritual: defend an academic thesis.",narrative:"The best-informed clan in the vampire world. What they know could change any war.",img:mkSVG("#0a0a12",cVonderLt,"GG","circle")},
+  {id:"von_lilithvian",name:"Lilithvian Clan",concept:"Senses · Hedonistic matriarchal",tags:["Pro-Pact","4 Lords","Matriarchy"],morph:"Extremely sharpened senses. Some develop new senses (thermal perception, etc.).",culture:"Hedonistic clan favoring the conversion of women. Men are servants. Orgies as maturation ritual.",narrative:"Pleasure as a weapon. Their sensory information network is unstoppable.",img:mkSVG("#150a12",cVonderLt,"LV","scales")},
+  {id:"von_carniolas",name:"Carniolas Clan",concept:"Mind · Manipulators",tags:["Pro-Pact","3 Lords","Revolutions"],morph:"Mind control, telepathy or extreme psychic fortitude.",culture:"Extremely dispersed, live among humans. Their Lords found temporary anarchist communities.",narrative:"The maturation ritual is to incite revolutions. Most die in the process.",img:mkSVG("#0a1015",cVonderLt,"CR","hex")},
+  {id:"von_teosofistas",name:"Teosofistas Clan",concept:"Sacred · Religious vampires",tags:["Pro-Pact","3 Lords","Christian"],morph:"Natural resistance to sacred objects. Can touch crucifixes without harm.",culture:"Actively serve organized religions (Catholic, Orthodox, Protestant). Baptism as maturation ritual.",narrative:"The divine irony: vampires who pray.",img:mkSVG("#121010",cVonderLt,"TS","wave")},
+  {id:"von_necrospecies",name:"Necrospecies Clan",concept:"Flesh · Necromancers",tags:["Anti-Pact","3 Lords","Golems"],morph:"Dominion over living flesh (biokinesis) and dead (necromancy). Pale skin with black veins.",culture:"Practitioners of necromancy. Often ally with Vurdalok and Verney. Maturation ritual: create a golem from dead flesh.",narrative:"Those who never bury their dead. They raise them.",img:mkSVG("#0a0a0a",cVonderLt,"NC","gothic")},
+  {id:"von_verney",name:"Verney Clan",concept:"Blood · Hematic masters",tags:["Anti-Pact","2 Lords","Blood control"],morph:"Ability to control blood, inside and outside the body. Can stop hemorrhages or cause them.",culture:"Secession from the Necrospecies. Considered less brutal but equally dangerous.",narrative:"Your blood is their weapon. Never face a Verney if you have an open wound.",img:mkSVG("#0a0505",cVonderLt,"VN","circle")},
+  {id:"von_cihuateteo",name:"Cihuateteo Clan",concept:"Strength · Law of the strongest",tags:["Anti-Pact","1 Lord","Violent matriarchy"],morph:"Imposing physique, superhuman strength. Ritual scars as adornment.",culture:"Violent clan where they kill each other for power. Master-servant relationship where the servant must try to kill the master.",narrative:"The jungle clan. Only the strong survive.",img:mkSVG("#120808",cVonderLt,"CI","scales")},
+  {id:"von_azeman",name:"Azeman Clan",concept:"Combat · Professional warriors",tags:["Neutral","1 Lord","Mercenaries"],morph:"Body trained to the limit. Superhuman reflexes.",culture:"Martial experts. Serve as bodyguards or elite mercenaries. Ritual: underground combat tournament.",narrative:"The living weapon. Hire them if you can pay.",img:mkSVG("#101005",cVonderLt,"AZ","wave")},
+  {id:"von_strigoi",name:"Strigoi Clan",concept:"Communication · Mad hermits",tags:["Neutral","1 Lord","Voices"],morph:"Glassy eyes, erratic gestures. Hear voices others don't perceive.",culture:"Marginalized, disorganized. Often lost in the 'voices' they hear. Ritual: sleep one year in a sealed sarcophagus.",narrative:"The mad know things the sane ignore.",img:mkSVG("#0a0a0a",cVonderLt,"ST","crystal")}
+];
+
+// WORLD STRUCTURE
+const WD = [
+  {id:"rudon",name:"The World of Rudon",genre:"Epic Fantasy · Dragons",year:"The World of Magic",color:cRudon,colorLt:cRudonLt,img:mkProj("#120A05",cRudonLt,"R"),species:rudonSpecies},
+  {id:"azul",name:"Planet Blue Universe",genre:"Hard Science Fiction",year:"Far Future",color:cAzul,colorLt:cAzulLt,img:mkProj("#050A10",cAzulLt,"P"),species:azulSpecies},
+  {id:"vonder",name:"Vonderburg Manual",genre:"Gothic Horror · Vampires",year:"Velum Salomonis Universe",color:cVonder,colorLt:cVonderLt,img:mkProj("#0D0307",cVonderLt,"V"),species:vonderSpecies}
+];
+
+let CW = WD[0];
+let filtered = CW.species;
+let openSp = null;
+
+function render(){
+  const wr = document.getElementById("world-row");
+  wr.innerHTML = WD.map(w => `<div class="wcard${CW.id===w.id?' active':''}" style="${CW.id===w.id?`border-color:${w.color};`:''}" data-id="${w.id}">
+    <img class="wcard-img" src="${w.img}" alt="${w.name}"/>
+    <div class="wcard-bar" style="background:${w.color};"></div>
+    <div class="wcard-info">
+      <div class="wcard-genre" style="color:${w.colorLt};">${w.genre}</div>
+      <div class="wcard-name">${w.name}</div>
+      <div class="wcard-count">${w.species.length} species · ${w.year}</div>
+    </div>
+  </div>`).join("");
+  document.getElementById("sx-meta").textContent = `${CW.species.length} catalogued species · ${CW.year}`;
+  renderGrid();
+  document.querySelectorAll(".wcard").forEach(el => el.addEventListener("click",()=>{
+    const nw = WD.find(w=>w.id===el.dataset.id);
+    if(nw && nw.id!==CW.id){ CW = nw; document.getElementById("sx-filter").value=""; filtered = CW.species; render(); }
+  }));
+}
+
+function renderGrid(){
+  const q = document.getElementById("sx-filter").value.toLowerCase().trim();
+  filtered = q ? CW.species.filter(s => s.name.toLowerCase().includes(q) || s.concept.toLowerCase().includes(q) || s.tags.some(t=>t.toLowerCase().includes(q))) : CW.species;
+  document.getElementById("sx-count").textContent = filtered.length+" / "+CW.species.length;
+  const g = document.getElementById("sp-grid");
+  if(!filtered.length){ g.innerHTML=`<div class="empty">No results for "${q}"</div>`; return; }
+  g.innerHTML = filtered.map(sp => `<div class="spcard" data-id="${sp.id}">
+    <img class="spcard-img" src="${sp.img}" alt="${sp.name}"/>
+    <div class="spcard-overlay"></div>
+    <div class="spcard-info">
+      <div class="spcard-concept" style="color:${CW.colorLt};">${sp.concept.split("·")[0].trim()}</div>
+      <div class="spcard-name">${sp.name}</div>
+      <div class="tags-mini">${sp.tags.slice(0,2).map(t=>`<span class="tag-mini" style="color:${CW.colorLt};border-color:${CW.color};">${t}</span>`).join("")}</div>
+    </div>
+  </div>`).join("");
+  document.querySelectorAll(".spcard").forEach(el => el.addEventListener("click",()=>{
+    const sp = filtered.find(s=>s.id===el.dataset.id);
+    if(sp) openModal(sp);
+  }));
+}
+
+function openModal(sp){
+  openSp = sp;
+  document.getElementById("m-img").src = sp.img;
+  document.getElementById("m-img").alt = sp.name;
+  document.getElementById("m-bar").style.background = CW.color;
+  document.getElementById("m-project").style.color = CW.colorLt;
+  document.getElementById("m-project").textContent = CW.genre+" · "+CW.name;
+  document.getElementById("m-name").textContent = sp.name;
+  document.getElementById("m-concept").textContent = sp.concept;
+  document.getElementById("m-tags").innerHTML = sp.tags.map(t=>`<span class="modal-tag" style="border-color:${CW.color};color:${CW.colorLt};">${t}</span>`).join("");
+  document.getElementById("m-s1").textContent = sp.morph;
+  document.getElementById("m-s2").textContent = sp.culture;
+  document.getElementById("m-s3").textContent = sp.narrative;
+  document.getElementById("m-l1").style.color = CW.colorLt;
+  document.getElementById("m-l2").style.color = CW.colorLt;
+  document.getElementById("m-l3").style.color = CW.colorLt;
+  document.getElementById("modal-wrap").classList.add("open");
+}
+function closeModal(){ document.getElementById("modal-wrap").classList.remove("open"); openSp=null; }
+document.getElementById("modal-bg").addEventListener("click",closeModal);
+document.getElementById("modal-close").addEventListener("click",closeModal);
+document.addEventListener("keydown",e=>{if(e.key==="Escape") closeModal();});
+document.getElementById("sx-filter").addEventListener("input",renderGrid);
+render();
+</script>
+</body>
+</html>
