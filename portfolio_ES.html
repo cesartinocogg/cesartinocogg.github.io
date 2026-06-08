@@ -394,6 +394,60 @@
     .project-cover { align-self: flex-start; }
     .project-cover img { width: 120px; height: 160px; }
   }
+    /* NUEVOS ESTILOS DEL BOTÓN DEL EXPLORADOR (IN-UNIVERSE / EDITORIAL STYLE) */
+  .btn-explorer-striking {
+    display: inline-flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1rem 2.2rem;
+    background-color: var(--ink);
+    color: var(--paper);
+    border: 1px solid var(--ink);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+  .btn-explorer-striking .btn-arrow {
+    font-size: 1.1rem;
+    transition: transform 0.35s ease;
+  }
+  .btn-explorer-striking:hover {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    color: var(--ink);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(200, 168, 96, 0.2);
+  }
+  .btn-explorer-striking:hover .btn-arrow {
+    transform: translateX(6px);
+  }
+
+  @media (max-width: 900px) {
+    nav, section, footer { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .hero { padding: 4rem 1.5rem 3rem; }
+    .hero-stats { grid-template-columns: repeat(2, auto); }
+    .about-grid, .skills-grid, .project-body, .comp-grid, .pillars, .clan-grid { grid-template-columns: 1fr; }
+    .project-header { grid-template-columns: 1fr; }
+    .project-number { writing-mode: horizontal-tb; transform: none; padding: 1.5rem; font-size: 4rem; }
+    .pillars, .species-sample, .clan-grid, .quote-block { margin-left: 0; margin-right: 0; }
+    .project-body { padding: 2rem 1.5rem; }
+    footer { grid-template-columns: 1fr; }
+    .footer-right { text-align: left; }
+    nav ul { gap: 1rem; }
+    .exp-row { grid-template-columns: 1fr; }
+    .hero-top { flex-direction: column-reverse; align-items: center; }
+    .hero-photo img { width: 140px; height: 180px; }
+    .hero-bottom { flex-direction: column; }
+    .patreon-box { justify-content: center; }
+    .project-meta { flex-direction: column-reverse; align-items: flex-start; }
+    .project-cover { align-self: flex-start; }
+    .project-cover img { width: 120px; height: 160px; }
+  }
 </style>
 </head>
 <body>
