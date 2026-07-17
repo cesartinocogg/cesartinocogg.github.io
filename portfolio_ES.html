@@ -372,22 +372,23 @@
     letter-spacing: .12em; text-transform: uppercase;
     color: rgba(245,242,236,.35);
   }
-  /* ─── GLOBO FLOTANTE DE CURSO ────────────────────── */
+
+  /* ─── GLOBOS FLOTANTES DE CURSO ────────────────────── */
   .floating-popup {
     position: fixed;
     bottom: 30px;
-    right: 30px;
     background-color: var(--paper);
     border: 2px solid var(--accent);
     box-shadow: 0 12px 40px rgba(13, 13, 15, 0.4);
     width: 320px;
     padding: 2rem 2rem 1.8rem;
     z-index: 1000;
-    /* Animación de entrada suave */
     transform: translateY(150%);
     animation: slideUpFloat 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-    animation-delay: 1.5s; /* Aparece 1.5s después de cargar la página */
+    animation-delay: 1.5s;
   }
+  .popup-left { left: 30px; }
+  .popup-right { right: 30px; }
 
   .floating-popup .close-btn {
     position: absolute;
@@ -433,7 +434,6 @@
     line-height: 1.4;
   }
 
-  /* Ajuste pequeño para el botón dentro del pop-up */
   .floating-popup .popup-btn {
     padding: 0.6rem 1.2rem;
     font-size: 0.7rem;
@@ -448,12 +448,14 @@
   /* Adaptación para móviles */
   @media (max-width: 900px) {
     .floating-popup {
-      bottom: 20px;
-      right: 20px;
-      left: 20px;
       width: auto;
+      left: 20px;
+      right: 20px;
     }
+    .popup-left { bottom: 20px; }
+    .popup-right { bottom: 260px; } /* Evita superposición en móviles */
   }
+
   @media (max-width: 900px) {
     nav, section, footer { padding-left: 1.5rem; padding-right: 1.5rem; }
     .hero { padding: 4rem 1.5rem 3rem; }
@@ -886,7 +888,7 @@
     <div class="project-col">
       <h4>Seis Sistemas Religiosos Diseñados</h4>
       <ul>
-        <li><strong>Eudaimonismo</strong> — Sintetiza seis corrientes filosóficas (Humanismo, Altruismo, Estoicismo, Determinismo, Hedonismo, Idealismo) en una práctica vivida. Las bibliotecas y los observatorios son sus templos.</li>
+        <li><strong>Eudaimonism</strong> — Sintetiza seis corrientes filosóficas (Humanismo, Altruismo, Estoicismo, Determinismo, Hedonismo, Idealismo) en una práctica vivida. Las bibliotecas y los observatorios son sus templos.</li>
         <li><strong>Tenguer</strong> — Orden religioso-marcial: el combate como camino hacia la claridad espiritual. Las Espadas Mariposa son su mayor secreto, un arma doble capaz de atravesar cualquier material, incluidos los anillos generadores Warp.</li>
         <li><strong>Senda del Vínculo</strong> — La ética de un lazo que no puedes revocar. La Federación exige 90 días de espera. Los Vinculados responden: "La muerte también es irreversible y nadie pide consentimiento para nacer."</li>
         <li><strong>Los Ojos del Fondo</strong> — La piel de la especie Lateo segrega una sustancia que produce estados místicos en otras especies, ellos nunca pidieron esto, el debate ético de lo que tu biología hace en otras mentes.</li>
@@ -1057,7 +1059,7 @@
   <div class="section-label">05 &nbsp; Experiencia Profesional</div>
 
   <div class="exp-row">
-    <div class="exp-date">2024 – Presente</div>
+    <div class="exp-date">2024 – Present</div>
     <div>
       <div class="exp-title">Autor Publicado y Consultor Narrativo Independiente</div>
       <div class="exp-org">Autónomo / Remoto</div>
@@ -1163,19 +1165,38 @@
   <img id="lb-img" src="" alt="Vista ampliada" onclick="event.stopPropagation()"/>
   <div class="lb-hint">ESC · clic fuera para cerrar</div>
 </div>
-<!-- GLOBO FLOTANTE DE CURSO -->
-<div id="course-popup" class="floating-popup">
-  <button class="close-btn" onclick="closePopup()">×</button>
+
+<!-- GLOBOS FLOTANTES DE CURSO -->
+<!-- GLOBO IZQUIERDO (Mythopoeia Tools) -->
+<div id="course-popup-left" class="floating-popup popup-left">
+  <button class="close-btn" onclick="closePopup('course-popup-left')">×</button>
+  <div class="popup-content">
+    <span class="popup-label">Mythopoeia Tools</span>
+    <h4>Final Worldbuilding Fantasy</h4>
+    <p><strong>Gestor de contenido:</strong> Completo para tu mundo. Organiza personajes, ubicaciones, mapas, relaciones y líneas de tiempo en un solo lugar. Compendio personalizado con categorías definidas por el usuario. Archivo de mapas con ubicaciones y visor de cronología.</p>
+    <p><strong>Map for Mythopoeia:</strong> Un editor de imágenes sencillo. Pinta libremente en un lienzo o sube tus propias imágenes para crear mapas personalizados. Dibujo a mano alzada, selector de color, subida de imágenes por capas y exportación en PNG.</p>
+    <p><strong>Mythopoeia Maker:</strong> Tablero basado en pasajes para historias interactivas no lineales. Visualiza narrativas ramificadas. Nodos de pasaje de arrastrar y soltar, conecta elecciones y condiciones. Exporta aventuras como HTML independiente.</p>
+    <a href="https://cesartinocogg.github.io/MythopoeiaTools/" class="btn-explorer-striking popup-btn">
+      <span>Descubrir Suite</span>
+      <span class="btn-arrow">→</span>
+    </a>
+  </div>
+</div>
+
+<!-- GLOBO DERECHO (Curso) -->
+<div id="course-popup-right" class="floating-popup popup-right">
+  <button class="close-btn" onclick="closePopup('course-popup-right')">×</button>
   <div class="popup-content">
     <span class="popup-label">Nuevo Curso</span>
-    <h4>Diseño Narrativo</h4>
-    <p>Aprende a construir ecosistemas, facciones y magia con reglas inmutables.</p>
+    <h4>Curso de Escritura</h4>
+    <p>Aprende a construir ecosistemas, facciones y magia con reglas y el oficio de escribir.</p>
     <a href="curso.html" class="btn-explorer-striking popup-btn">
       <span>Ver Temario</span>
       <span class="btn-arrow">→</span>
     </a>
   </div>
 </div>
+
 <script>
   function openLightbox(src) {
     if (!src || src.indexOf('TU_URL') !== -1) return;
@@ -1186,9 +1207,11 @@
     document.body.style.overflow = 'hidden';
   }
   // Función para cerrar el popup del curso
-  function closePopup() {
-    var popup = document.getElementById('course-popup');
-    popup.style.display = 'none';
+  function closePopup(id) {
+    var popup = document.getElementById(id);
+    if (popup) {
+      popup.style.display = 'none';
+    }
   }
   function closeLightbox() {
     document.getElementById('lb-overlay').classList.remove('open');

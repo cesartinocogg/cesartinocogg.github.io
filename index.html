@@ -346,22 +346,23 @@
     cursor: zoom-out;
     animation: lb-fade .18s ease;
   }
-  /* ─── GLOBO FLOTANTE DE CURSO ────────────────────── */
+
+  /* ─── GLOBOS FLOTANTES DE CURSO ────────────────────── */
   .floating-popup {
     position: fixed;
     bottom: 30px;
-    right: 30px;
     background-color: var(--paper);
     border: 2px solid var(--accent);
     box-shadow: 0 12px 40px rgba(13, 13, 15, 0.4);
     width: 320px;
     padding: 2rem 2rem 1.8rem;
     z-index: 1000;
-    /* Animación de entrada suave */
     transform: translateY(150%);
     animation: slideUpFloat 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-    animation-delay: 1.5s; /* Aparece 1.5s después de cargar la página */
+    animation-delay: 1.5s;
   }
+  .popup-left { left: 30px; }
+  .popup-right { right: 30px; }
 
   .floating-popup .close-btn {
     position: absolute;
@@ -407,7 +408,6 @@
     line-height: 1.4;
   }
 
-  /* Ajuste pequeño para el botón dentro del pop-up */
   .floating-popup .popup-btn {
     padding: 0.6rem 1.2rem;
     font-size: 0.7rem;
@@ -422,12 +422,14 @@
   /* Adaptación para móviles */
   @media (max-width: 900px) {
     .floating-popup {
-      bottom: 20px;
-      right: 20px;
-      left: 20px;
       width: auto;
+      left: 20px;
+      right: 20px;
     }
+    .popup-left { bottom: 20px; }
+    .popup-right { bottom: 260px; } /* Evita superposición en móviles */
   }
+
   @keyframes lb-fade { from { opacity:0; } to { opacity:1; } }
   .lb-overlay.open { display: flex; }
   .lb-overlay img {
@@ -771,25 +773,25 @@
   </div>
 
   <div class="quote-block" style="background:var(--rudon); border-color:var(--accent);">
-    <blockquote>"Year 1240 C.E. is the year before everything changes. The stories that occur in it are the stories of people who do not yet know they are in that year. That specific ignorance — of being on the threshold without knowing it is a threshold — is the gift that Rudon's present gives the creator."</blockquote>
+    <blockquote>"Year 1240 C.E. is the year before everything changes. The stories that occur in it are the stories of people who do not yet know they are in that year. That specific ignorance, of being on the threshold without knowing it is a threshold, is the gift the present of Rudon gives the creator."</blockquote>
     <cite>— The Scriptures of Rudon, Adaptation Guide for Creators</cite>
   </div>
 </section>
 
-<!-- PROYECTO 2: PLANETA AZUL -->
+<!-- PROYECTO 2: BLUE PLANET -->
 <section class="project-block azul" style="padding:0; border-top:3px solid var(--azul);">
   <div class="project-header">
     <div class="project-number">02</div>
     <div class="project-meta">
       <div class="project-meta-text">
-      <div class="project-genre">Hard Sci-Fi · Space Opera · Narrative Bible</div>
-      <h2 class="project-title">Universe<br/>Planet Blue</h2>
-      <p class="project-pitch">A galactic civilization where democracy erodes into corporate feudalism wherever quantum communications don't reach — and secrets are the most valuable currency in the universe.</p>
+      <div class="project-genre">Hard Science Fiction · Space Opera · Narrative Bible</div>
+      <h2 class="project-title">Blue Planet<br/>Universe</h2>
+      <p class="project-pitch">"A galactic civilization where democracy erodes into corporate feudalism wherever quantum communications cannot reach, and secrets are the most valuable currency in the universe."</p>
       <div class="project-tags">
-        <span class="tag">30+ Especies</span>
-        <span class="tag">5 Major Factions</span>
-        <span class="tag">6 Religion Systems</span>
-        <span class="tag">Real Physics Applied</span>
+        <span class="tag">30+ Species</span>
+        <span class="tag">5 Main Factions</span>
+        <span class="tag">6 Religious Systems</span>
+        <span class="tag">Applied Real Physics</span>
         <span class="tag">Political Economy</span>
         <span class="tag">21 Sections</span>
       </div>
@@ -806,28 +808,28 @@
   </div>
 
   <div class="note-band">
-    <span>Tone: Hard Sci-Fi + Space Opera Drama · NASAPUNK Aesthetic (Federation) · Fetish Aesthetic (Wilstoide) · Neo-Bushido (Saito)</span>
+    <span>Tone references: Hard Sci-Fi + Space Opera Drama · NASAPUNK Aesthetic (Federation) · Fetish Aesthetic (Wilstoid) · Neo-Bushido (Saito)</span>
     <span>Language: English/Spanish</span>
     <span>Scale: Galactic — 40+ cluster systems with their respective planets</span>
   </div>
 
   <div class="project-body">
     <div class="project-col">
-      <h4>Technology Systems Designed</h4>
+      <h4>Technological Systems Designed</h4>
       <ul>
-        <li><strong>Warp Engine (Alcubierre-Casimir)</strong> — Based on real 1994 physics. One activation equals Earth's annual electricity output. Restricted to military and elite use.</li>
-        <li><strong>Quantum Entanglement Network</strong> — A pre-existing dimension within the galactic equivalent of the Internet. Accessing it with a full-control interface leaves the physical body completely defenseless.</li>
-        <li><strong>Mara Modular Ships</strong> — Circular modular architecture inspired by a real Venezuelan architect from 1972. The design philosophy shapes the entire aesthetic identity of the Federation.</li>
-        <li><strong>UMPA Exoskeletons</strong> — Repurposed industrial units. The underworld's warship. Four tactical variants, each with its own doctrine.</li>
-        <li><strong>Stellar Battery</strong> — Only one exists. Irreplicable. The Federation's most classified secret, powering humanity's mothership.</li>
+        <li><strong>Warp Drive (Alcubierre-Casimir)</strong> — Based on real physics from 1994. One activation equals Earth's annual electrical production. Restricted to military and elite use.</li>
+        <li><strong>Quantum Entanglement Network</strong> — A pre-existing dimension within the Galactic Internet equivalent. Species access it via an interface that leaves the physical body completely defenseless.</li>
+        <li><strong>Mara Modular Ships</strong> — Modular circular architecture based on a real Venezuelan architect from 1972. The design philosophy shapes the entire aesthetic identity of the Federation.</li>
+        <li><strong>UMPA Exoskeletons</strong> — Converted industrial units. The warship of the underworld. Four tactical variants, each with its own doctrine.</li>
+        <li><strong>Stellar Battery</strong> — Only one exists. Irreplicable. The most classified secret of the Federation, powering humanity's mothership.</li>
       </ul>
     </div>
     <div class="project-col">
       <h4>World-System Design Decisions</h4>
       <ul>
-        <li><strong>AI Prohibition</strong> — The AI War drew the legal boundary between Artificial Intelligence (banned) and Virtual Intelligence (controlled). The self-replicating machine factory was never found.</li>
-        <li><strong>Espers</strong> — Inter-species hybrid individuals with anomalous cognitive abilities. Detained on a secret planet whose existence the Federation officially denies.</li>
-        <li><strong>Wormholes as Narrative Engine</strong> — Natural, uncontrollable, unpredictable. When one closes, it can isolate an entire cluster forever. The tragedy of the Human and Maint Clusters results from this.</li>
+        <li><strong>AI Prohibition</strong> — The AI War drew the legal line between Artificial Intelligence (prohibited) and Virtual Intelligence (controlled). The factory of self-replicating machines was never found.</li>
+        <li><strong>Espers</strong> — Interspecies hybrid individuals with anomalous cognitive capacities. Detained on a secret planet whose existence the Federation officially denies.</li>
+        <li><strong>Wormholes as Narrative Engine</strong> — Natural, uncontrollable, unpredictable. When one closes, it can isolate an entire cluster forever. The tragedy of the Human and Maint Clusters is a result of this.</li>
         <li><strong>Feudal Periphery</strong> — Clusters without quantum nodes operate in a different political reality: no central authority, no standard currency, no military protection.</li>
         <li><strong>Q / "The Architect of Chaos"</strong> — A single unidentified individual who temporarily collapsed the Federation using only information, money, and time. Identity unknown. Motivations unknown. Still at large.</li>
       </ul>
@@ -835,7 +837,7 @@
   </div>
 
   <div style="padding: 0 5rem 1rem;">
-    <p style="font-size:.8rem; font-family:'DM Mono',monospace; letter-spacing:.1em; text-transform:uppercase; color:var(--azul); margin-bottom:1rem;">Species Catalog Sample (30+ species designed)</p>
+    <p style="font-size:.8rem; font-family:'DM Mono',monospace; letter-spacing:.1em; text-transform:uppercase; color:var(--azul); margin-bottom:1rem;">Species Catalog Sample (over 30 species designed)</p>
   </div>
 
   <div class="species-sample">
@@ -851,33 +853,33 @@
       <tbody>
         <tr>
           <td>Eoalo</td>
-          <td>Luminous spheroids, 0.5–3m, light appendages</td>
-          <td>Trifrequential communication; only Espers perceive the third frequency</td>
+          <td>Luminous spheroids, 0.5–3 m, light appendages</td>
+          <td>Tri-frequency communication; only Espers perceive the third frequency</td>
           <td>The most advanced species. Never defeated. Never understood. Their warnings are always cryptic and always precise.</td>
         </tr>
         <tr>
           <td>Uteo</td>
-          <td>Silicon-based, crystalline mineral</td>
+          <td>Silicon base, crystalline mineral</td>
           <td>Their entire civilization is frozen in collective sacrifice to contain the Entity</td>
-          <td>One representative awake. Millions asleep underfoot. "La Joya" has been emitting a continuous scream for 3,000 years.</td>
+          <td>One awakened representative. Millions asleep beneath the surface. "The Jewel" has been screaming continuously for 3,000 years.</td>
         </tr>
         <tr>
           <td>Esmiyuga</td>
-          <td>Vermiform, obligate symbiosis</td>
+          <td>Vermiform, obligatory symbiosis</td>
           <td>Integrates into the host's nervous system; separation kills the host</td>
           <td>The Path of the Bond: a religion built around choosing a symbiotic tie you can never undo.</td>
         </tr>
         <tr>
           <td>Maint</td>
-          <td>Humanoid, horns, hip-mounted wings, prehensile tail</td>
-          <td>Real atmospheric flight. Isolated from the universe when their wormhole closed.</td>
-          <td>A civilization isolated indefinitely. The tragedy of Yejekia Ben Ari: her daughter is an Esper. What does she sacrifice to save her?</td>
+          <td>Humanoid, horns, hip-wings, prehensile tail</td>
+          <td>True atmospheric flight. Isolated from the universe when their wormhole closed.</td>
+          <td>An indefinitely isolated civilization. The tragedy of Yejekia Ben Ari: her daughter is an Esper. What will she sacrifice to save her?</td>
         </tr>
         <tr>
-          <td>Wilstoide</td>
-          <td>Reptiloid bipeds, bone crests that grow for life</td>
-          <td>Elders have massive bone "helmets"; they are living libraries venerated above all</td>
-          <td>The supreme antagonist empire. Their greatest fear: the Condemned to the Broken Quill — total erasure from all records.</td>
+          <td>Wilstoid</td>
+          <td>Bipedal reptiloids, bone crests that grow lifelong</td>
+          <td>Elders have massive bone "helmets"; they are living libraries revered above all</td>
+          <td>The ultimate antagonist empire. Their greatest fear: the Condemnation of the Broken Feather, being totally erased from all records.</td>
         </tr>
       </tbody>
     </table>
@@ -885,56 +887,56 @@
 
   <div class="project-body">
     <div class="project-col">
-      <h4>Six Religion Systems Designed</h4>
+      <h4>Six Religious Systems Designed</h4>
       <ul>
         <li><strong>Eudaimonism</strong> — Synthesizes six philosophical currents (Humanism, Altruism, Stoicism, Determinism, Hedonism, Idealism) into a lived practice. Libraries and observatories are its temples.</li>
-        <li><strong>Tenguer</strong> — Martial-religious order: combat as the path to spiritual clarity. The Butterfly Swords are their greatest secret — a dual weapon capable of cutting through any material, including Warp ring generators.</li>
-        <li><strong>Path of the Bond</strong> — The ethics of a bond you cannot revoke. The Federation requires 90 days of waiting. The Bonded reply: "Death is also irreversible and nobody asks consent for birth."</li>
-        <li><strong>Eyes of the Deep</strong> — The Lateo species' skin secretes a substance that produces mystical states in other species. They never asked for this. The ethical debate of what your biology does to other minds.</li>
+        <li><strong>Tenguer</strong> — Martial-religious order: combat as a path to spiritual clarity. The Butterfly Swords are their greatest secret, a dual weapon capable of piercing any material, including Warp generator rings.</li>
+        <li><strong>Path of the Bond</strong> — The ethics of a tie you cannot revoke. The Federation requires a 90-day waiting period. The Bonded reply: "Death is also irreversible, and no one asks for consent to be born."</li>
+        <li><strong>The Eyes of the Deep</strong> — The skin of the Lateo species secretes a substance that produces mystical states in other species. They never asked for this; the ethical debate of what your biology does to other minds.</li>
         <li><strong>Grand Hermeneutics</strong> — The universe as an infinite text. The Threshold Cults read meanings that destroy sanity in ordinary minds.</li>
-        <li><strong>The Scaly Design</strong> — The Wilstoide theocracy: racial supremacy as divine mandate. Legally classified as hate ideology in federal space.</li>
+        <li><strong>Scaly Design</strong> — The Wilstoid theocracy: racial supremacy as divine mandate, legally classified as hate ideology in federal space.</li>
       </ul>
     </div>
     <div class="project-col">
-      <h4>Narrative Arcs &amp; Open Tensions</h4>
+      <h4>Narrative Arcs and Open Tensions</h4>
       <ul>
-        <li><strong>The Maint Tragedy</strong> — The Ben Ari family seat, the universe's greatest transporter, is in a cluster isolated forever. The heir's daughter is imprisoned in the Federation's secret genetics facility. What does she sacrifice to save her?</li>
-        <li><strong>The Saito Succession</strong> — Five heirs, five possible futures for the human empire: federation, vassalage, religious theocracy, reform, or chaos. The Wilstoide have already bet.</li>
-        <li><strong>Espers and Academia</strong> — The Federation's greatest secret is also its greatest ethical shame. The day it becomes public, no institutional legitimacy survives.</li>
-        <li><strong>The Eoalo Mystery</strong> — Why do they observe and never intervene? What does the Gamma frequency contain? Are the wormholes their creation — or their responsibility?</li>
-        <li><strong>Q's Return</strong> — "Q didn't leave. Q is waiting. The pizza is reheating." An open arc designed to destabilize the universe-level status quo at any narrative moment the team decides.</li>
+        <li><strong>The Maint Tragedy</strong> — The headquarters of the Ben Ari family, the universe's largest transporter, is in a forever isolated cluster. The heir's daughter is imprisoned in the Federation's secret genetic center. What will she sacrifice to save her?</li>
+        <li><strong>The Saito Succession</strong> — Five heirs, five possible futures for the human empire: federation, vassalage, religious theocracy, reform, or chaos. The Wilstoids have already placed their bets.</li>
+        <li><strong>The Espers and Academy</strong> — The Federation's greatest secret is also its greatest ethical shame. The day it goes public, no institutional legitimacy survives.</li>
+        <li><strong>The Eoalo Mystery</strong> — Why do they observe and never intervene? What does the Gamma frequency contain? Are the wormholes their creation, or their responsibility?</li>
+        <li><strong>The Return of Q</strong> — "Q didn't leave. Q is waiting. The pizza is reheating." An open arc designed to destabilize the universe's status quo at any narrative moment the team decides.</li>
       </ul>
     </div>
   </div>
 
   <div class="quote-block" style="background:var(--azul); border-color:var(--accent);">
-    <blockquote>"Millions. The entire planet is an organism. And it has been asleep for three thousand years beneath the feet of a civilization that never knew it was walking over people."</blockquote>
-    <cite>— Blue Planet Universe, description of the Uteo people and La Joya</cite>
+    <blockquote>"Millions. The entire planet is an organism. And it has been asleep for three thousand years beneath the feet of a civilization that never knew it was walking on people."</blockquote>
+    <cite>— Blue Planet Universe, description of the Uteo people and The Jewel</cite>
   </div>
 </section>
 
-<!-- PROYECTO 3: VONDERBURG -->
+<!-- PROJECT 3: VONDERBURG -->
 <section class="project-block vonder" style="padding:0; border-top:3px solid var(--vonder);">
   <div class="project-header">
     <div class="project-number">03</div>
     <div class="project-meta">
       <div class="project-meta-text">
       <div class="project-genre">Gothic Horror · Urban Fantasy · Operational Doctrine</div>
-      <h2 class="project-title">Manual for<br/>Hunting Vampires<br/>of the Vonderburgs</h2>
-      <p class="project-pitch">Within the Velum Salomonis Narrative Universe, this is an operational field manual for a vampire-hunting clan — written entirely as a classified in-universe primary source, fusing vampire taxonomy, military doctrine, legal ethics, and organizational psychology into a single cohesive system.</p>
+      <h2 class="project-title">Vonderburg's<br/>Vampire Hunting<br/>Manual</h2>
+      <p class="project-pitch">Set within the Velum Salomonis Narrative Universe, this is an operational field manual for a clan of vampire hunters. Written entirely from an in-universe perspective as a classified primary source, it merges vampiric taxonomy, military doctrine, legal ethics, and organizational psychology into a single cohesive system.</p>
       <div class="project-tags">
-        <span class="tag">15 Vampire Clans</span>
-        <span class="tag">5-Tier Hierarchy</span>
-        <span class="tag">Documento In-Universe</span>
+        <span class="tag">15 Vampiric Clans</span>
+        <span class="tag">5-Level Hierarchy</span>
+        <span class="tag">In-Universe Document</span>
         <span class="tag">Tactical Doctrine</span>
-        <span class="tag">Ethics Framework</span>
+        <span class="tag">Ethical Framework</span>
         <span class="tag">Case Studies</span>
       </div>
       </div>
       <div class="project-cover">
         <img
           src="cccfc991bc8ce85acf6ade85a46f9247.jpg"
-          alt="Vonderburg Vampire Hunting Manual"
+          alt="Vonderburg's Vampire Hunting Manual"
           onclick="openLightbox(this.src)"
           title="Click to enlarge"
         />
@@ -949,7 +951,7 @@
   </div>
 
   <div style="padding: 2rem 5rem .5rem;">
-    <p style="font-size:.8rem; font-family:'DM Mono',monospace; letter-spacing:.1em; text-transform:uppercase; color:var(--muted);">15 Vampire Clans with their own Concept, Alignment, and Ritual — Sample</p>
+    <p style="font-size:.8rem; font-family:'DM Mono',monospace; letter-spacing:.1em; text-transform:uppercase; color:var(--muted);">15 Vampiric Clans with Unique Concept, Alignment, and Ritual — Sample</p>
   </div>
 
   <div class="clan-grid">
@@ -957,103 +959,103 @@
       <div class="clan-name">Draskull</div>
       <div class="clan-concept">Concept: Dominion · Lords: 5</div>
       <span class="clan-align align-pro">Pro-Pact</span>
-      <p>The most numerous and organized. Members use their Concept to dominate territories, creating personality cults. Governance rotates between three lords every 10 years.</p>
+      <p>The most numerous and organized. Members use their Concept to dominate territories by creating personality cults. Governance rotates among three lords every 10 years.</p>
     </div>
     <div class="clan-card">
       <div class="clan-name">Vurdalok</div>
       <div class="clan-concept">Concept: Hidden · Lords: 3</div>
       <span class="clan-align align-con">Anti-Pact</span>
-      <p>Led by Dimitri Vurdalok — a former member of the hunters' own bloodline. Primary target of the entire Vonderburg clan. Open Hunt authorized at all times.</p>
+      <p>Led by Dimitri Vurdalok, a former member of the hunters' own lineage and primary target of the entire Vonderburg clan. Open Hunt authorized at all times.</p>
     </div>
     <div class="clan-card">
       <div class="clan-name">Borgias</div>
       <div class="clan-concept">Concept: Subterfuge · Lords: 2</div>
       <span class="clan-align align-neu">Neutral</span>
-      <p>The second most numerous. They live infiltrated in the highest spheres of society. Their elders control mafias, banks, and corporations. Natural enemies of the Carniolas.</p>
+      <p>The second most numerous. They live infiltrated in the upper echelons of society. Their elders control mafias, banks, and corporations. Natural enemies of the Carniolas.</p>
     </div>
     <div class="clan-card">
       <div class="clan-name">Tzimacan</div>
       <div class="clan-concept">Concept: Form · Lords: 3</div>
       <span class="clan-align align-pro">Pro-Pact</span>
-      <p>Reclusive, living in deep forests. Their Ritual transforms a newly converted vampire into an animal companion — with whom many develop romantic bonds.</p>
+      <p>Reclusive in deep forests. Their Ritual transforms a newly converted vampire into an animal companion, with whom many develop romantic bonds.</p>
     </div>
     <div class="clan-card">
       <div class="clan-name">Rangda</div>
       <div class="clan-concept">Concept: Magic · Lords: 2</div>
       <span class="clan-align align-con">Anti-Pact</span>
-      <p>Serve occult cults and dark sects with strong ties to demons. One lord is a direct servant of the demon Belial. Protocol: immediate retreat and specialist reinforcement.</p>
+      <p>They serve occult cults and dark sects with strong ties to demons. One of their lords is a direct servant of the demon Belial. Protocol upon encounter: immediate retreat and specialized reinforcement.</p>
     </div>
     <div class="clan-card">
       <div class="clan-name">Gorgoneias</div>
       <div class="clan-concept">Concept: Intelligence · Lords: 1</div>
       <span class="clan-align align-neu">Neutral</span>
-      <p>Scholarly and philosophical. Headquartered on the island of Lesbos. The only clan to openly serve a primordial Yuán zǔ vampire. Maturation ritual: defend an academic thesis.</p>
+      <p>Scholarly and philosophical, headquartered on the island of Lesbos. The only clan that openly serves a Yuán zǔ (primordial) vampire. Maturation ritual: defending an academic thesis.</p>
     </div>
   </div>
 
   <div class="project-body three-col">
     <div class="project-col">
-      <h4>Core System: The Vampiric Impulse</h4>
-      <p>The central mechanical tension: vampires are cursed with an insatiable need to drink human blood — but doing so degrades them, costing power and status. A Yuán zǔ (primordial) who yields becomes a lesser Lord. Recovery requires centuries of complete abstinence.</p>
-      <p>This creates a built-in internal conflict for every vampire regardless of alignment: their greatest temptation is also the thing that makes them weaker and easier to kill.</p>
+      <h4>Core System: The Vampiric Urge</h4>
+      <p>The central mechanical tension: vampires are cursed with an insatiable need to drink human blood, but doing so degrades them, costing them power and status. A Yuán zǔ (primordial) who yields becomes a lesser Lord; recovery requires centuries of total abstinence.</p>
+      <p>This creates an internal conflict in every vampire regardless of alignment: their greatest temptation is also what weakens them and makes them easier to kill.</p>
     </div>
     <div class="project-col">
       <h4>Operational Doctrine</h4>
       <ul>
-        <li><strong>Phase Zero</strong> — No hunt begins without: target intelligence, terrain recon, nest identification, incursion plan with contingencies.</li>
-        <li><strong>Anvil and Hammer</strong> — Two-team pincer: one seals the main exit, the other drives the target from secondary routes into the Anvil's trap.</li>
-        <li><strong>The Hour Before Dawn</strong> — Optimal assault window when targets are fatigued and forced toward their lair.</li>
-        <li><strong>Pursuit Rule</strong> — Pursuit is a failure of planning. Only under specific conditions (silver-wounded, open terrain, dawn imminent).</li>
+        <li><strong>Phase Zero</strong> — No hunt begins without: target intelligence, terrain reconnaissance, nest identification, and a raid plan with contingencies.</li>
+        <li><strong>Hammer and Anvil</strong> — Two teams in a pincer: one seals the main exit, the other forces the target from secondary routes into the Anvil's trap.</li>
+        <li><strong>The Hour Before Dawn</strong> — Optimal assault window when targets are fatigued and forced to retreat to their lair.</li>
+        <li><strong>Rule of Pursuit</strong> — Pursuit is a failure of planning. Only under specific conditions (wounded by silver, open terrain, imminent dawn).</li>
         <li><strong>Velum Protocol</strong> — If a civilian witnesses combat, the primary objective shifts from eliminating the vampire to securing the witness.</li>
       </ul>
     </div>
     <div class="project-col">
-      <h4>Legal &amp; Ethics Framework</h4>
+      <h4>Ethical and Legal Framework</h4>
       <ul>
-        <li>Authority derives from the Velum Salomonis — a global concealment spell — not from any state.</li>
+        <li>Authority derives from the Velum Salomonis—a global concealment spell—not from any state.</li>
         <li>Zero civilian casualties is a categorical imperative, not a preference.</li>
         <li>Killing a civilian witness is punishable by expulsion and death.</li>
-        <li>Neutral clans are never attacked without provocation — Active Surveillance only.</li>
-        <li>A hunter who causes a Breach of the Veil must undertake an Expiation Rite: a solo mission to correct their error or die trying.</li>
-        <li>Three documented case studies (Night Eagle, The Prague Error, The Sevastopol Trap) used in training doctrine.</li>
+        <li>Neutral clans are never attacked without provocation; only Active Surveillance.</li>
+        <li>A hunter who causes a Breach of the Veil must undertake a Rite of Atonement: a solo mission to correct their mistake or die trying.</li>
+        <li>Three documented case studies (Night Eagle, Prag's Error, The Sevastopol Trap) used in training doctrine.</li>
       </ul>
     </div>
   </div>
 
   <div class="quote-block" style="background:var(--vonder); border-color:var(--accent);">
-    <blockquote>"We are not killers; we are surgeons removing a cancer. Discipline is what separates us from the monsters."</blockquote>
+    <blockquote>"We are not murderers; we are surgeons excising a cancer. Discipline is what separates us from the monsters."</blockquote>
     <cite>— Vonderburg Codex, Part III: Hunter Legislation and Ethics</cite>
   </div>
 </section>
 
-<!-- LO QUE DEMUESTRA EL TRABAJO -->
+<!-- WHAT THIS WORK DEMONSTRATES -->
 <section id="methodology">
   <div class="section-label">04 &nbsp; What This Work Demonstrates</div>
   <div class="comp-grid">
     <div class="comp-item">
       <h4><em>Consistency</em> as a Design Principle</h4>
       <div class="comp-bar"></div>
-      <p>Every system in my worlds operates the same way for everyone. Rudon's Immutable Laws apply to gods and students alike. Warp physics apply whether you are the Federation or a mercenary. Internal rules are non-negotiable — and that is what creates trust in a fictional world.</p>
+      <p>Every system in my worlds works the same for everyone. The Immutable Laws of Rudon apply equally to gods and apprentices. Warp physics apply whether you are the Federation or a mercenary. Internal rules are non-negotiable, and that is what builds trust in a fictional world.</p>
     </div>
     <div class="comp-item">
-      <h4>Moral <em>Complexity</em> Without Both-Sidesism</h4>
+      <h4><em>Moral Complexity</em> without Forced Equidistance</h4>
       <div class="comp-bar"></div>
-      <p>No faction in any of my projects is simply evil. Rudon's Matte Dragons are right in the diagnosis and wrong in the response. The Federation imprisons Espers out of fear, not malice. The Vonderburg clan hunts the monster that was once their own blood. Complexity is structured, not vague.</p>
+      <p>No faction in any of my projects is simply evil. The Matte Dragons of Rudon are right in their diagnosis and wrong in their response. The Federation imprisons Espers out of fear, not malice. The Vonderburg clan hunts the monster that was once their own blood. The complexity is structured, not vague.</p>
     </div>
     <div class="comp-item">
       <h4><em>Systemic</em> Plot Generation</h4>
       <div class="comp-bar"></div>
-      <p>My worlds don't contain stories — they generate them. Rudon's 20+ plot seeds each pull on a different systemic thread. The open arcs in Blue Planet (Q, the Maint Cluster, Academia, the AI factory) are designed to destabilize the world at any narrative moment the team decides.</p>
+      <p>My worlds do not contain stories; they generate them. Rudon's 20+ plot seeds each pull on a different systemic thread. The open arcs in Blue Planet (Q, the Maint Cluster, Academy, the AI factory) are designed to destabilize the world at whatever narrative moment the team decides.</p>
     </div>
     <div class="comp-item">
       <h4>Documents Written <em>for Other Creators</em></h4>
       <div class="comp-bar"></div>
-      <p>A narrative bible is useless if only the author can navigate it. All three projects include explicit adaptation guides for creators, tone notes, sensory design references for illustrators and game masters, and visual guides for designers — written for cross-disciplinary teams.</p>
+      <p>A narrative bible is useless if only the author can navigate it. All three projects include explicit adaptation guides for creators, tone notes, sensory design references for illustrators and game masters, and visual guides for designers, written for cross-disciplinary teams.</p>
     </div>
   </div>
 </section>
 
-<!-- EXPERIENCIA -->
+<!-- EXPERIENCE -->
 <section id="experience">
   <div class="section-label">05 &nbsp; Professional Experience</div>
 
@@ -1062,12 +1064,12 @@
     <div>
       <div class="exp-title">Published Author &amp; Independent Narrative Consultant</div>
       <div class="exp-org">Freelance / Remote</div>
-      <div class="exp-desc">Full authorial pipeline including editorial process management, personal branding, and literary distribution. Simultaneous development of the three narrative universes documented in this portfolio.</div>
+      <div class="exp-desc">Full authorial pillar including management of editorial processes, personal branding, and literary distribution. Simultaneous development of the three narrative universes documented in this portfolio.</div>
     </div>
   </div>
 
   <div class="exp-row">
-    <div class="exp-date">Oct – Dic 2025</div>
+    <div class="exp-date">Oct – Dec 2025</div>
     <div>
       <div class="exp-title">Cinematographic Screenwriting Course</div>
       <div class="exp-org">Centro Nacional Autónomo de Cinematografía (CNAC)</div>
@@ -1078,18 +1080,18 @@
   <div class="exp-row">
     <div class="exp-date">2024</div>
     <div>
-      <div class="exp-title">Master's Degree — Esports Management</div>
+      <div class="exp-title">Master in Esports Management</div>
       <div class="exp-org">EBS Business School / IEBS, Spain</div>
-      <div class="exp-desc">Specialized business education combining game industry operations, community management, and strategic marketing.</div>
+      <div class="exp-desc">Specialized business training combining video game industry operations, community management, and strategic marketing.</div>
     </div>
   </div>
 
   <div class="exp-row">
     <div class="exp-date">Nov 2020 – Feb 2024</div>
     <div>
-      <div class="exp-title">COO &amp; Project Manager</div>
+      <div class="exp-title">COO and Project Manager</div>
       <div class="exp-org">EVE Games Studios (Venezuela)</div>
-      <div class="exp-desc">Coordinated workflows across creative, development, and marketing teams using SCRUM methodology. Supervised project timelines (Gantt/JIRA) to ensure on-time delivery of digital products.</div>
+      <div class="exp-desc">Coordination of workflows across creative, development, and marketing teams using SCRUM methodology. Supervision of project schedules (Gantt/JIRA) to ensure timely digital product deliveries.</div>
     </div>
   </div>
 
@@ -1098,7 +1100,7 @@
     <div>
       <div class="exp-title">Game Designer</div>
       <div class="exp-org">Hello Monster (Spain – Remote)</div>
-      <div class="exp-desc">Designed the experience, rules, and mechanics to make the game engaging and compelling.</div>
+      <div class="exp-desc">Crafting the experience, rules, and mechanics to ensure the game is fun and engaging.</div>
     </div>
   </div>
 
@@ -1107,16 +1109,16 @@
     <div>
       <div class="exp-title">Director of Marketing &amp; Operations</div>
       <div class="exp-org">Fusion Esports (USA – Remote)</div>
-      <div class="exp-desc">Full coordination of the marketing and operations department. Influencer Marketing campaigns (+40% engagement in 6 months) and growth strategies (+200% community growth in one year).</div>
+      <div class="exp-desc">Comprehensive coordination of the marketing and operations department. Managed Influencer Marketing campaigns (+40% engagement in 6 months) and implemented growth strategies (+200% community in one year).</div>
     </div>
   </div>
 
   <div class="exp-row">
-    <div class="exp-date">Jun 2022 – Ene 2023</div>
+    <div class="exp-date">Jun 2022 – Jan 2023</div>
     <div>
-      <div class="exp-title">Ghost Screenwriter</div>
+      <div class="exp-title">Ghostwriter</div>
       <div class="exp-org">YouTube Content Production</div>
-      <div class="exp-desc">Writing and coordination of audiovisual scripts for YouTube, including narrative structure, pacing, and voice direction.</div>
+      <div class="exp-desc">Writing and coordinating audiovisual scripts for a YouTube channel, including narrative structure, pacing, and voice direction.</div>
     </div>
   </div>
 
@@ -1125,18 +1127,18 @@
     <div>
       <div class="exp-title">University Professor</div>
       <div class="exp-org">Universidad Bolivariana de Venezuela</div>
-      <div class="exp-desc">Academic planning and instruction — a discipline requiring clear, structured communication of complex systems to diverse audiences. A direct analogue to writing creator documentation for cross-disciplinary game development teams.</div>
+      <div class="exp-desc">Academic planning and instruction—a discipline that requires clear and structured communication of complex systems to diverse audiences. Direct analogy to writing documentation for creators in cross-disciplinary development teams.</div>
     </div>
   </div>
 
 </section>
 
-<!-- PIE / CONTACTO -->
+<!-- FOOTER / CONTACT -->
 <footer id="contact">
   <div>
     <h2>Let's build<br/><em>worlds together.</em></h2>
-    <p>Open to narrative design, worldbuilding, and lore documentation roles in game development.</p>
-    <p>Available for: Full-time · Contract · Consulting</p>
+    <p>Available for narrative design, worldbuilding, and lore documentation roles in video game development.</p>
+    <p>Formats: Full-time · Contract · Consulting</p>
     <p style="margin-top:1rem;">
       <a href="mailto:series852@gmail.com">series852@gmail.com</a><br/>
       <a href="https://linkedin.com/in/cesartinocogg" target="_blank">linkedin.com/in/cesartinocogg</a><br/>
@@ -1148,14 +1150,14 @@
     <div class="label">Location</div>
     <div class="info" style="margin-bottom:1.2rem;">Valencia, Carabobo, Venezuela</div>
     <div class="label">Languages</div>
-    <div class="info" style="margin-bottom:1.2rem;">Spanish (native) · English (A2)</div>
+    <div class="info" style="margin-bottom:1.2rem;">Spanish (Native) · English (A2)</div>
     <div class="label">Availability</div>
     <div class="info">Remote · International</div>
   </div>
 </footer>
 
 <div style="background:#0d0d0f; color:rgba(245,242,236,.25); font-family:'DM Mono',monospace; font-size:.62rem; letter-spacing:.1em; text-align:center; padding:.8rem; text-transform:uppercase;">
-  César Enrique Tinoco Fernández &nbsp;·&nbsp; Narrative Design Portfolio &nbsp;·&nbsp; All world systems, documents and designs are original works
+  César Enrique Tinoco Fernández &nbsp;·&nbsp; Narrative Design Portfolio &nbsp;·&nbsp; All world systems, documents, and designs are original works
 </div>
 
 <!-- LIGHTBOX -->
@@ -1164,9 +1166,27 @@
   <img id="lb-img" src="" alt="Enlarged view" onclick="event.stopPropagation()"/>
   <div class="lb-hint">ESC · click outside to close</div>
 </div>
-<!-- GLOBO FLOTANTE DE CURSO -->
-<div id="course-popup" class="floating-popup">
-  <button class="close-btn" onclick="closePopup()">×</button>
+
+<!-- GLOBOS FLOTANTES DE CURSO -->
+<!-- GLOBO IZQUIERDO (Mythopoeia Tools - IN ENGLISH) -->
+<div id="course-popup-left" class="floating-popup popup-left">
+  <button class="close-btn" onclick="closePopup('course-popup-left')">×</button>
+  <div class="popup-content">
+    <span class="popup-label">Mythopoeia Tools</span>
+    <h4>Final Worldbuilding Fantasy</h4>
+    <p><strong>Content Manager:</strong> Complete for your world. Organize characters, locations, maps, relationships, and timelines in one place. Custom compendium with user-defined categories. Map archive with locations and timeline viewer.</p>
+    <p><strong>Map for Mythopoeia:</strong> A simple image editor. Freely paint on a canvas or upload your own images to create custom maps. Freehand drawing, color picker, layered image upload, and PNG export.</p>
+    <p><strong>Mythopoeia Maker:</strong> A passage-based board for non-linear interactive stories. Visualize branching narratives. Drag-and-drop passage nodes, connect choices and conditions. Export adventures as standalone HTML.</p>
+    <a href="https://cesartinocogg.github.io/MythopoeiaTools/" class="btn-explorer-striking popup-btn">
+      <span>Discover Suite</span>
+      <span class="btn-arrow">→</span>
+    </a>
+  </div>
+</div>
+
+<!-- GLOBO DERECHO (Curso - en español) -->
+<div id="course-popup-right" class="floating-popup popup-right">
+  <button class="close-btn" onclick="closePopup('course-popup-right')">×</button>
   <div class="popup-content">
     <span class="popup-label">Nuevo Curso</span>
     <h4>Curso de Escritura</h4>
@@ -1177,6 +1197,7 @@
     </a>
   </div>
 </div>
+
 <script>
   function openLightbox(src) {
     if (!src || src.indexOf('TU_URL') !== -1) return;
@@ -1187,9 +1208,11 @@
     document.body.style.overflow = 'hidden';
   }
   // Función para cerrar el popup del curso
-  function closePopup() {
-    var popup = document.getElementById('course-popup');
-    popup.style.display = 'none';
+  function closePopup(id) {
+    var popup = document.getElementById(id);
+    if (popup) {
+      popup.style.display = 'none';
+    }
   }
   function closeLightbox() {
     document.getElementById('lb-overlay').classList.remove('open');
