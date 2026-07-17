@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Curso Extenso de Escritura Creativa · Portfolio</title>
+  
+  <!-- FAVICON AÑADIDO -->
+  <link rel="icon" type="image/x-icon" href="favicon.png">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    /* ─── RESET & ROOT ─── */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    :root {
+      --bg: #f8f6f2;
+      --ink: #1e1c1a;
+      --muted: #7a756b;
+      --rule: #d8d2c6;
+      --accent: #b8944c;
+      --accent-dark: #8f7538;
+      --paper: #ffffff;
+      --shadow: 0 12px 40px -12px rgba(0, 0, 0, 0.08);
+      --radius: 8px;
+    }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.6;
+      font-size: 17px;
+      -webkit-font-smoothing: antialiased;
+    }
+    a {
+      color: var(--accent-dark);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    a:hover {
+      color: var(--accent);
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* ─── TIPOGRAFÍA ─── */
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      letter-spacing: -0.01em;
+    }
+    h1 {
+      font-size: clamp(2.8rem, 6vw, 4.8rem);
+      line-height: 1.05;
+    }
+    h2 {
+      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      line-height: 1.1;
+      margin-bottom: 1.2rem;
+    }
+    h2 em {
+      font-style: italic;
+      color: var(--accent-dark);
+    }
+    h3 {
+      font-size: 1.6rem;
+      margin-bottom: 0.8rem;
+    }
+    .label-mono {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .label-mono::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--rule);
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      background: var(--ink);
+      color: #f0ede8;
+      padding: 0 2rem;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 2px solid var(--accent);
+    }
+    nav .brand {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+    nav ul a {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #f0ede8;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+    nav ul a:hover {
+      opacity: 1;
+      color: var(--accent);
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      background: var(--ink);
+      color: #f0ede8;
+      padding: 5rem 0 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: 'CAMPBELL · McKEE · SANDERSON';
+      position: absolute;
+      bottom: 1.5rem;
+      right: 2rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      color: rgba(255, 255, 255, 0.06);
+      white-space: nowrap;
+    }
+    .hero .container {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: flex-start;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+    }
+    .hero-content {
+      flex: 1 1 45%;
+      min-width: 280px;
+    }
+    .hero-right {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      flex: 0 0 auto;
+    }
+    .hero .subtitle {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .hero .subtitle::before {
+      content: '';
+      display: block;
+      width: 3rem;
+      height: 1px;
+      background: var(--accent);
+    }
+    .hero h1 {
+      max-width: 14ch;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+    .hero p {
+      font-size: 1.15rem;
+      color: rgba(240, 237, 232, 0.7);
+      max-width: 60ch;
+      margin: 1.5rem 0 2.5rem;
+      line-height: 1.7;
+    }
+    .hero-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2.5rem;
+      border-top: 1px solid rgba(240, 237, 232, 0.1);
+      padding-top: 2rem;
+    }
+    .hero-stats .stat {
+      display: flex;
+      flex-direction: column;
+    }
+    .hero-stats .stat .num {
+      font-family: 'DM Mono', monospace;
+      font-size: 1.8rem;
+      font-weight: 500;
+      color: var(--accent);
+      line-height: 1;
+    }
+    .hero-stats .stat .lab {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(240, 237, 232, 0.4);
+      margin-top: 0.2rem;
+    }
+
+    /* ─── BOTÓN PATREON ─── */
+    .patreon-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2rem;
+      padding: 0.8rem 1.8rem;
+      background-color: #FF424D;
+      color: #fff !important;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      border-radius: var(--radius);
+      transition: background-color 0.2s, transform 0.2s;
+    }
+    .patreon-btn:hover {
+      background-color: #e63c45;
+      transform: translateY(-2px);
+    }
+
+    .hero-photo img {
+      width: 180px;
+      height: 240px;
+      object-fit: cover;
+      border: 2px solid var(--accent);
+      display: block;
+      filter: grayscale(15%);
+      transition: opacity 0.25s, transform 0.25s;
+    }
+    .hero-photo img:hover {
+      opacity: 0.85;
+      transform: scale(1.02);
+    }
+
+    /* ─── WIDGET INSTAGRAM ─── */
+    /* ─── CONTENEDOR PARA POST DE INSTAGRAM ─── */
+    .instagram-post-container {
+      width: 100%;
+      max-width: 350px; /* Controla el ancho máximo */
+      background: var(--paper);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    }
+    
+    /* Para forzar a Instagram a respetar el ancho en móviles */
+    .instagram-post-container iframe {
+      max-width: 100% !important;
+    }
+
+    /* ─── SECTION ─── */
+    section {
+      padding: 4.5rem 0;
+    }
+    section+section {
+      border-top: 1px solid var(--rule);
+    }
+
+    /* ─── SOBRE EL CURSO ─── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    .about-grid .text p {
+      color: #3a3732;
+      margin-bottom: 1rem;
+    }
+    .about-grid .text p:last-child {
+      margin-bottom: 0;
+    }
+    .pillars-mini {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.8rem;
+      margin-top: 1.5rem;
+    }
+    .pillars-mini .pill {
+      background: var(--paper);
+      padding: 1rem 1.2rem;
+      border-left: 3px solid var(--accent);
+      box-shadow: var(--shadow);
+      border-radius: var(--radius);
+    }
+    .pillars-mini .pill strong {
+      display: block;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent-dark);
+      margin-bottom: 0.2rem;
+    }
+    .pillars-mini .pill span {
+      font-size: 0.92rem;
+      color: #3a3732;
+    }
+
+    .facilitador-card {
+      background: var(--paper);
+      padding: 2rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--rule);
+    }
+    .facilitador-card h4 {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent-dark);
+      margin-bottom: 0.8rem;
+    }
+    .facilitador-card .nombre {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+      font-family: 'Cormorant Garamond', serif;
+    }
+    .facilitador-card .tagline {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: 0.8rem;
+    }
+    .facilitador-card .cv-item {
+      font-size: 0.9rem;
+      color: #3a3732;
+      margin-bottom: 0.6rem;
+      display: flex;
+      gap: 0.5rem;
+      align-items: baseline;
+    }
+    
+    /* SOLUCIÓN AL TEXTO SOBREPUESTO */
+    .facilitador-card .cv-item strong {
+      font-weight: 600;
+      color: var(--ink);
+      min-width: 125px; /* Aumentado para dar espacio a "Publicaciones" */
+      flex-shrink: 0;   /* Evita que el contenedor aplaste el texto */
+      font-size: 0.8rem;
+      font-family: 'DM Mono', monospace;
+      letter-spacing: 0.04em;
+    }
+    
+    .facilitador-card .cv-item .detalle {
+      color: #2d2b28;
+    }
+    .facilitador-card .cv-divider {
+      height: 1px;
+      background: var(--rule);
+      margin: 0.8rem 0;
+    }
+    .facilitador-card .badge-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.5rem;
+    }
+    .facilitador-card .badge-list span {
+      background: var(--bg);
+      padding: 0.15rem 0.8rem;
+      border-radius: 40px;
+      font-size: 0.7rem;
+      font-family: 'DM Mono', monospace;
+      color: var(--muted);
+      border: 1px solid var(--rule);
+    }
+
+    /* ─── BLOQUES / MÓDULOS ─── */
+    .blocks {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: var(--rule);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-top: 2rem;
+    }
+    .block {
+      background: var(--paper);
+      padding: 2rem 1.8rem;
+    }
+    .block .block-letter {
+      font-family: 'DM Mono', monospace;
+      font-size: 2.2rem;
+      font-weight: 500;
+      color: var(--accent-dark);
+      line-height: 1;
+      margin-bottom: 0.2rem;
+    }
+    .block .block-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 400;
+      margin-bottom: 0.8rem;
+    }
+    .block .block-hours {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+    .block ul {
+      list-style: none;
+      margin-top: 0.5rem;
+    }
+    .block ul li {
+      font-size: 0.92rem;
+      padding: 0.4rem 0;
+      border-bottom: 1px dashed var(--rule);
+      display: flex;
+      align-items: baseline;
+      gap: 0.6rem;
+      color: #3a3732;
+    }
+    .block ul li:last-child {
+      border-bottom: none;
+    }
+    .block ul li .mod {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      flex-shrink: 0;
+      width: 2.8rem;
+    }
+
+    /* ─── CRONOGRAMA ─── */
+    .schedule-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.92rem;
+      background: var(--paper);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      margin-top: 2rem;
+    }
+    .schedule-table thead {
+      background: var(--ink);
+      color: #f0ede8;
+    }
+    .schedule-table thead th {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 400;
+      padding: 0.9rem 1.2rem;
+      text-align: left;
+    }
+    .schedule-table tbody td {
+      padding: 0.8rem 1.2rem;
+      border-bottom: 1px solid var(--rule);
+      color: #3a3732;
+      vertical-align: top;
+    }
+    .schedule-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+    .schedule-table tbody td:first-child {
+      font-weight: 500;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--accent-dark);
+    }
+    .schedule-table .mod-list {
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+    .schedule-table .mod-list .mod-code {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      color: var(--muted);
+      background: var(--bg);
+      padding: 0.1rem 0.4rem;
+      border-radius: 4px;
+      margin-right: 0.2rem;
+    }
+    .schedule-table .note {
+      font-style: italic;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    /* ─── METODOLOGÍA ─── */
+    .method-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+    }
+    .method-grid .card {
+      background: var(--paper);
+      padding: 1.8rem 2rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .method-grid .card h4 {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent-dark);
+      margin-bottom: 0.6rem;
+    }
+    .method-grid .card p,
+    .method-grid .card li {
+      font-size: 0.92rem;
+      color: #3a3732;
+    }
+    .method-grid .card ul {
+      list-style: none;
+      margin-top: 0.3rem;
+    }
+    .method-grid .card ul li {
+      padding: 0.3rem 0 0.3rem 1.2rem;
+      position: relative;
+      border-bottom: 1px solid var(--rule);
+    }
+    .method-grid .card ul li:last-child {
+      border-bottom: none;
+    }
+    .method-grid .card ul li::before {
+      content: '▪';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 0.6rem;
+      top: 0.45rem;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--ink);
+      color: #f0ede8;
+      padding: 3rem 0;
+      border-top: 3px solid var(--accent);
+      margin-top: 2rem;
+    }
+    footer .container {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 3rem;
+      align-items: start;
+    }
+    footer h2 {
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      font-weight: 300;
+      margin-bottom: 0.5rem;
+    }
+    footer h2 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+    footer p {
+      color: rgba(240, 237, 232, 0.6);
+      font-size: 0.95rem;
+      margin-bottom: 0.3rem;
+    }
+    footer .info-right {
+      text-align: right;
+    }
+    footer .info-right .label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(240, 237, 232, 0.3);
+      margin-top: 0.8rem;
+    }
+    footer .info-right .value {
+      color: rgba(240, 237, 232, 0.8);
+      font-size: 0.95rem;
+    }
+    footer .info-right .value:last-child {
+      margin-bottom: 0;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      .about-grid,
+      .blocks,
+      .method-grid {
+        grid-template-columns: 1fr;
+      }
+      .blocks {
+        gap: 2px;
+      }
+      .pillars-mini {
+        grid-template-columns: 1fr;
+      }
+      footer .container {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      footer .info-right {
+        text-align: center;
+      }
+      nav ul {
+        gap: 1rem;
+      }
+      .hero .container {
+        flex-direction: column;
+        align-items: center;
+      }
+      .hero-right {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+      }
+      .hero-photo img {
+        width: 140px;
+        height: 180px;
+      }
+      .insta-widget {
+        width: 100%;
+        max-width: 280px;
+      }
+      .container {
+        padding: 0 1.5rem;
+      }
+      .schedule-table thead th,
+      .schedule-table tbody td {
+        padding: 0.6rem 0.8rem;
+        font-size: 0.82rem;
+      }
+      .schedule-table .mod-list {
+        font-size: 0.78rem;
+      }
+    }
+    @media (max-width: 500px) {
+      nav .brand {
+        font-size: 0.6rem;
+      }
+      nav ul a {
+        font-size: 0.6rem;
+        letter-spacing: 0.05em;
+      }
+      .hero-stats {
+        gap: 1.5rem;
+      }
+      .hero-stats .stat .num {
+        font-size: 1.4rem;
+      }
+      .hero-right {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- ─── NAV ─── -->
+  <nav>
+    <div class="brand">CURSO · ESCRITURA CREATIVA</div>
+    <ul>
+      <li><a href="#curso">El Curso</a></li>
+      <li><a href="#estructura">Estructura</a></li>
+      <li><a href="#cronogramas">Cronograma</a></li>
+      <li><a href="#metodologia">Metodología</a></li>
+    </ul>
+  </nav>
+
+  <!-- ─── HERO ─── -->
+  <header class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="subtitle">Formación integral del escritor narrativo</div>
+        <h1>Curso Extenso de <br /><em>Escritura Creativa</em></h1>
+        <p>
+          Brandon Sanderson · Joseph Campbell · Robert McKee<br />
+          Una síntesis de tres maestros para dominar el oficio, la estructura y el alma de las historias.
+        </p>
+        <div class="hero-stats">
+          <div class="stat"><span class="num">15</span><span class="lab">Horas totales</span></div>
+          <div class="stat"><span class="num">15</span><span class="lab">Módulos</span></div>
+          <div class="stat"><span class="num">3</span><span class="lab">Bloques temáticos</span></div>
+          <div class="stat"><span class="num">3</span><span class="lab">Semanas (intensivo)</span></div>
+        </div>
+        
+        <!-- BOTÓN PATREON AÑADIDO -->
+        <a href="https://www.patreon.com/c/CesarTinocoGG" target="_blank" rel="noopener noreferrer" class="patreon-btn">
+          Apoya mi trabajo en Patreon
+        </a>
+
+      </div>
+      <div class="hero-right">
+        <div class="hero-photo">
+          <img
+            src="https://cesartinocogg.github.io/foto.png"
+            alt="César Tinoco — Facilitador"
+            title="César Tinoco"
+          />
+        </div>
+
+        <!-- ─── WIDGET DE INSTAGRAM (incrustado) ─── -->
+        <div class="insta-widget">
+          <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/p/DZaV_6hDdNo/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14" style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);"><div style="padding:16px;"> <a href="https://www.instagram.com/p/DZaV_6hDdNo/?utm_source=ig_embed&amp;utm_campaign=loading" style=" background:#FFFFFF; line-height:0; padding:0 0; text-align:center; text-decoration:none; width:100%;" target="_blank"> <div style=" display: flex; flex-direction: row; align-items: center;"> <div style="background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 40px; margin-right: 14px; width: 40px;"></div> <div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center;"> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 100px;"></div> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 60px;"></div></div></div><div style="padding: 19% 0;"></div> <div style="display:block; height:50px; margin:0 auto 12px; width:50px;"><svg width="50px" height="50px" viewBox="0 0 60 60" version="1.1" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g transform="translate(-511.000000, -20.000000)" fill="#000000"><g><path d="M556.869,30.41 C554.814,30.41 553.148,32.076 553.148,34.131 C553.148,36.186 554.814,37.852 556.869,37.852 C558.924,37.852 560.59,36.186 560.59,34.131 C560.59,32.076 558.924,30.41 556.869,30.41 M541,60.657 C535.114,60.657 530.342,55.887 530.342,50 C530.342,44.114 535.114,39.342 541,39.342 C546.887,39.342 551.658,44.114 551.658,50 C551.658,55.887 546.887,60.657 541,60.657 M541,33.886 C532.1,33.886 524.886,41.1 524.886,50 C524.886,58.899 532.1,66.113 541,66.113 C549.9,66.113 557.115,58.899 557.115,50 C557.115,41.1 549.9,33.886 541,33.886 M565.378,62.101 C565.244,65.022 564.756,66.606 564.346,67.663 C563.803,69.06 563.154,70.057 562.106,71.106 C561.058,72.155 560.06,72.803 558.662,73.347 C557.607,73.757 556.021,74.244 553.102,74.378 C549.944,74.521 548.997,74.552 541,74.552 C533.003,74.552 532.056,74.521 528.898,74.378 C525.979,74.244 524.393,73.757 523.338,73.347 C521.94,72.803 520.942,72.155 519.894,71.106 C518.846,70.057 518.197,69.06 517.654,67.663 C517.244,66.606 516.755,65.022 516.623,62.101 C516.479,58.943 516.448,57.996 516.448,50 C516.448,42.003 516.479,41.056 516.623,37.899 C516.755,34.978 517.244,33.391 517.654,32.338 C518.197,30.938 518.846,29.942 519.894,28.894 C520.942,27.846 521.94,27.196 523.338,26.654 C524.393,26.244 525.979,25.756 528.898,25.623 C532.057,25.479 533.004,25.448 541,25.448 C548.997,25.448 549.943,25.479 553.102,25.623 C556.021,25.756 557.607,26.244 558.662,26.654 C560.06,27.196 561.058,27.846 562.106,28.894 C563.154,29.942 563.803,30.938 564.346,32.338 C564.756,33.391 565.244,34.978 565.378,37.899 C565.522,41.056 565.552,42.003 565.552,50 C565.552,57.996 565.522,58.943 565.378,62.101 M570.82,37.631 C570.674,34.438 570.167,32.258 569.425,30.349 C568.659,28.377 567.633,26.702 565.965,25.035 C564.297,23.368 562.623,22.342 560.652,21.575 C558.743,20.834 556.562,20.326 553.369,20.18 C550.169,20.033 549.148,20 541,20 C532.853,20 531.831,20.033 528.631,20.18 C525.438,20.326 523.257,20.834 521.349,21.575 C519.376,22.342 517.703,23.368 516.035,25.035 C514.368,26.702 513.342,28.377 512.574,30.349 C511.834,32.258 511.326,34.438 511.181,37.631 C511.035,40.831 511,41.851 511,50 C511,58.147 511.035,59.17 511.181,62.369 C511.326,65.562 511.834,67.743 512.574,69.651 C513.342,71.625 514.368,73.296 516.035,74.965 C517.703,76.634 519.376,77.658 521.349,78.425 C523.257,79.167 525.438,79.673 528.631,79.82 C531.831,79.965 532.853,80.001 541,80.001 C549.148,80.001 550.169,79.965 553.369,79.82 C556.562,79.673 558.743,79.167 560.652,78.425 C562.623,77.658 564.297,76.634 565.965,74.965 C567.633,73.296 568.659,71.625 569.425,69.651 C570.167,67.743 570.674,65.562 570.82,62.369 C570.966,59.17 571,58.147 571,50 C571,41.851 570.966,40.831 570.82,37.631"></path></g></g></g></svg></div><div style="padding-top: 8px;"> <div style=" color:#3897f0; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:550; line-height:18px;">Ver esta publicación en Instagram</div></div><div style="padding: 12.5% 0;"></div> <div style="display: flex; flex-direction: row; margin-bottom: 14px; align-items: center;"><div> <div style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(0px) translateY(7px);"></div> <div style="background-color: #F4F4F4; height: 12.5px; transform: rotate(-45deg) translateX(3px) translateY(1px); width: 12.5px; flex-grow: 0; margin-right: 14px; margin-left: 2px;"></div> <div style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(9px) translateY(-18px);"></div></div><div style="margin-left: 8px;"> <div style=" background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 20px; width: 20px;"></div> <div style=" width: 0; height: 0; border-top: 2px solid transparent; border-left: 6px solid #f4f4f4; border-bottom: 2px solid transparent; transform: translateX(16px) translateY(-4px) rotate(30deg)"></div></div><div style="margin-left: auto;"> <div style=" width: 0px; border-top: 8px solid #F4F4F4; border-right: 8px solid transparent; transform: translateY(16px);"></div> <div style=" background-color: #F4F4F4; flex-grow: 0; height: 12px; width: 16px; transform: translateY(-4px);"></div> <div style=" width: 0; height: 0; border-top: 8px solid #F4F4F4; border-left: 8px solid transparent; transform: translateY(-4px) translateX(8px);"></div></div></div> <div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center; margin-bottom: 24px;"> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 224px;"></div> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 144px;"></div></div></a><p style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;"><a href="https://www.instagram.com/p/DZaV_6hDdNo/?utm_source=ig_embed&amp;utm_campaign=loading" style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none;" target="_blank">Una publicación compartida de Cesar Tinoco (@cesartinocogg)</a></p></div></blockquote>
+<script async src="//www.instagram.com/embed.js"></script>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ─── SOBRE EL CURSO ─── -->
+  <section id="curso">
+    <div class="container">
+      <div class="label-mono">01 · Sobre el curso</div>
+      <div class="about-grid">
+        <div class="text">
+          <h2>Las tres fuentes <br /><em>fundamentales</em></h2>
+          <p>
+            Este curso no es una simple antología de técnicas. Es una estructura pedagógica que integra el
+            <strong>sustrato mitológico</strong> de Campbell, la <strong>arquitectura técnica</strong> de McKee y el
+            <strong>oficio práctico</strong> de Sanderson. Tres miradas que se complementan para ofrecer una formación
+            completa, desde el porqué de las historias hasta el cómo se publican.
+          </p>
+          <p>
+            Diseñado por <strong>César Tinoco</strong>, escritor y traductor literario con más de ocho años de experiencia
+            en narrativa, producción de contenido y docencia universitaria.
+          </p>
+          <div class="pillars-mini">
+            <div class="pill"><strong>Campbell</strong><span>El héroe de las mil caras — el sustrato universal</span></div>
+            <div class="pill"><strong>McKee</strong><span>El guión — estructura, antagonismo, escena</span></div>
+            <div class="pill"><strong>Sanderson</strong><span>Curso de escritura — oficio, mundos, edición</span></div>
+            <div class="pill"><strong>Metodología</strong><span>Práctica reflexiva · Talleres · Proyecto integrador</span></div>
+          </div>
+        </div>
+
+        <!-- ─── FACILITADOR (CV EXPANDIDO) ─── -->
+        <div class="facilitador-card">
+          <h4>Facilitador</h4>
+          <div class="nombre">César Enrique Tinoco Fernández</div>
+          <div class="tagline">Escritor · Traductor Literario · Guionista · Narrative Designer</div>
+
+          <div class="cv-item"><strong>Publicaciones</strong>
+            <span class="detalle"><em>Thomas Aldrich: La Historia de un Chico Malo</em> (trad.), <em>Guía para ser Shotcaller</em>, <em>Shiki Alter Awakening</em></span>
+          </div>
+          <div class="cv-item"><strong>Experiencia</strong>
+            <span class="detalle">Escritor/Traductor independiente (2023–presente) · Guionista & Ghostwriter (2022–2023) · Narrative Designer en EVE Games / Hello Monster (2020–2024)</span>
+          </div>
+          <div class="cv-item"><strong>Formación</strong>
+            <span class="detalle">Máster en Esports Management (EBS, 2024) · Taller de Guion CNAC (2025) · Lic. Derecho (UBV) · TSU Análisis y Diseño de Sistemas (UNEFA)</span>
+          </div>
+          <div class="cv-divider"></div>
+          <div class="badge-list">
+            <span>Traducción EN-ES</span>
+            <span>Worldbuilding</span>
+            <span>Estructura narrativa</span>
+            <span>Scrivener · KDP</span>
+            <span>Investigación</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── ESTRUCTURA ─── -->
+  <section id="estructura">
+    <div class="container">
+      <div class="label-mono">02 · Estructura del curso</div>
+      <h2>Tres bloques, <em>quince módulos</em></h2>
+      <div class="blocks">
+        <!-- BLOQUE A -->
+        <div class="block">
+          <div class="block-letter">A</div>
+          <div class="block-title">Fundamentos y Estructura</div>
+          <div class="block-hours">58 horas · Módulos 1–5</div>
+          <ul>
+            <li><span class="mod">M1</span> La narrativa y su propósito universal</li>
+            <li><span class="mod">M2</span> El origen de las historias</li>
+            <li><span class="mod">M3</span> Promesa, Progreso y Recompensa</li>
+            <li><span class="mod">M4</span> El monomito: la estructura universal</li>
+            <li><span class="mod">M5</span> Estructura narrativa profunda</li>
+          </ul>
+        </div>
+        <!-- BLOQUE B -->
+        <div class="block">
+          <div class="block-letter">B</div>
+          <div class="block-title">Elementos Narrativos en Profundidad</div>
+          <div class="block-hours">71 horas · Módulos 6–12</div>
+          <ul>
+            <li><span class="mod">M6</span> Arquetipos y géneros</li>
+            <li><span class="mod">M7</span> La creación de personajes</li>
+            <li><span class="mod">M8</span> Ambientación y construcción del mundo</li>
+            <li><span class="mod">M9</span> Sistemas especulativos</li>
+            <li><span class="mod">M10</span> Las cuatro vertientes de la escritura</li>
+            <li><span class="mod">M11</span> El diseño de la escena</li>
+            <li><span class="mod">M12</span> El principio del antagonismo</li>
+          </ul>
+        </div>
+        <!-- BLOQUE C -->
+        <div class="block">
+          <div class="block-letter">C</div>
+          <div class="block-title">Proceso Creativo y Publicación</div>
+          <div class="block-hours">28 horas · Módulos 13–15</div>
+          <ul>
+            <li><span class="mod">M13</span> Finales y convergencia de tramas</li>
+            <li><span class="mod">M14</span> El proceso de revisión</li>
+            <li><span class="mod">M15</span> El mundo editorial</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── CRONOGRAMA (SOLO 3 SEMANAS) ─── -->
+  <section id="cronogramas">
+    <div class="container">
+      <div class="label-mono">03 · Cronograma intensivo</div>
+      <h2>3 semanas <em>de inmersión total</em></h2>
+
+      <table class="schedule-table">
+        <thead><tr><th>Período</th><th>Horas</th><th>Módulos cubiertos</th><th>Notas</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Semana 1<br /><small>Días 1–7</small></td>
+            <td>5h</td>
+            <td class="mod-list">
+              <span class="mod-code">M1</span> La narrativa universal (10h)<br>
+              <span class="mod-code">M2</span> Origen de las historias (8h)<br>
+              <span class="mod-code">M3</span> Promesa, Progreso y Recompensa (10h)<br>
+              <span class="mod-code">M4</span> El monomito (15h)<br>
+              <span class="mod-code">M5</span> Estructura narrativa profunda (9h / 15h)
+            </td>
+            <td class="note">M1–M4 íntegros. Bloque A casi completo. M5 continúa en semana 2.</td>
+          </tr>
+          <tr>
+            <td>Semana 2<br /><small>Días 8–14</small></td>
+            <td>5h</td>
+            <td class="mod-list">
+              <span class="mod-code">M5</span> Estructura narrativa profunda (6h restantes)<br>
+              <span class="mod-code">M6</span> Arquetipos y géneros (10h)<br>
+              <span class="mod-code">M7</span> Creación de personajes (15h)<br>
+              <span class="mod-code">M8</span> Ambientación y mundo (10h)<br>
+              <span class="mod-code">M9</span> Sistemas especulativos (8h)<br>
+              <span class="mod-code">M10</span> Cuatro vertientes de la escritura (4h / 10h)
+            </td>
+            <td class="note">Cierra Bloque A. M6–M9 íntegros. M10 continúa en semana 3.</td>
+          </tr>
+          <tr>
+            <td>Semana 3<br /><small>Días 15–21</small></td>
+            <td>5h</td>
+            <td class="mod-list">
+              <span class="mod-code">M10</span> Cuatro vertientes de la escritura (6h restantes)<br>
+              <span class="mod-code">M11</span> Diseño de la escena (10h)<br>
+              <span class="mod-code">M12</span> El antagonismo (8h)<br>
+              <span class="mod-code">M13</span> Finales y convergencia (10h)<br>
+              <span class="mod-code">M14</span> Proceso de revisión (8h)<br>
+              <span class="mod-code">M15</span> El mundo editorial (10h)
+            </td>
+            <td class="note">Cierra Bloque B. Bloque C íntegro. Fin del curso.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ─── METODOLOGÍA ─── -->
+  <section id="metodologia">
+    <div class="container">
+      <div class="label-mono">04 · Metodología y evaluación</div>
+      <h2>Aprender <em>haciendo</em></h2>
+      <div class="method-grid">
+        <div class="card">
+          <h4>Enfoque combinado</h4>
+          <ul>
+            <li><strong>Exposición teórica</strong> — Principios de cada módulo con referencias directas a los textos fuente.</li>
+            <li><strong>Análisis de obras</strong> — Novelas, películas y cuentos como ilustración práctica.</li>
+            <li><strong>Ejercicios de escritura</strong> — Aplicación estructurada de cada principio en el texto propio.</li>
+            <li><strong>Talleres de revisión</strong> — Retroalimentación en grupo basada en criterios del módulo.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4>Evaluación en tres dimensiones</h4>
+          <ul>
+            <li><strong>Ejercicios de módulo</strong> — Entre 1 y 3 ejercicios específicos por módulo, evaluados con rúbricas.</li>
+            <li><strong>Proyecto integrador</strong> — Desarrollo del primer capítulo o tres capítulos de un proyecto propio, con esquema, fichas y escena revisada.</li>
+            <li><strong>Participación en talleres</strong> — Calidad y consistencia de la retroalimentación a compañeros.</li>
+          </ul>
+          <p style="margin-top:1rem; font-size:0.85rem; color:var(--muted);">
+            “El 90% de lo que debéis hacer es practicar, probar cosas, ver si mejoráis.” — Sanderson
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ─── -->
+  <footer>
+    <div class="container">
+      <div>
+        <h2>Escribe la historia <br /><em>que solo tú puedes contar</em></h2>
+        <p>Curso abierto y adaptable · 157 horas de formación integral</p>
+        <p style="font-size:0.85rem; color:rgba(240,237,232,0.4); margin-top:0.8rem;">
+          Diseño curricular basado en Campbell · McKee · Sanderson
+        </p>
+      </div>
+      <div class="info-right">
+        <div class="label">Facilitador</div>
+        <div class="value">César Tinoco</div>
+        <div class="label" style="margin-top:0.8rem;">Contacto</div>
+        <div class="value"><a href="mailto:series852@gmail.com" style="color:var(--accent);">series852@gmail.com</a></div>
+        <div class="value" style="font-size:0.8rem; color:rgba(240,237,232,0.4);">+58 412 596 21 83</div>
+        <div class="label" style="margin-top:0.8rem;">Ubicación</div>
+        <div class="value" style="font-size:0.85rem;">Valencia, Venezuela · Remoto</div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
